@@ -3,8 +3,6 @@ package com.snowdream.wallpaper.entity;
 
 public class Image extends Object {
 
-    protected String id;
-
     protected String title;
 
     protected String caption;

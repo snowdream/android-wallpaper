@@ -1,13 +1,15 @@
 
 package com.snowdream.wallpaper;
 
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.snowdream.wallpaper.entity.Album;
+import com.snowdream.wallpaper.entity.Albums;
 import com.snowdream.wallpaper.net.AsyncHttpClient;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 
 public class MainActivity extends Activity {
 
@@ -19,11 +21,10 @@ public class MainActivity extends Activity {
     }
 
     public void test(){
-        AsyncHttpClient.get("1bf862e3-a6a7-11e2-8058-026bc5020299", null, new AsyncHttpResponseHandler(){
+        AsyncHttpClient.get("http://gallerycms.ap01.aws.af.cm/index.php/api/myfeed/json/3720a0db-a6ab-11e2-8058-026bc5020299", null, new AsyncHttpResponseHandler(){
 
             @Override
             public void onFailure(Throwable arg0, String arg1) {
-                // TODO Auto-generated method stub
                 super.onFailure(arg0, arg1);
             }
 
@@ -43,8 +44,13 @@ public class MainActivity extends Activity {
             }
 
             @Override
-            public void onSuccess(String arg0) {
-                Log.i("", arg0);
+            public void onSuccess(String json) {
+                Log.i("", json);
+                Gson gson = new Gson();
+                /*Album album = gson.fromJson(json, Album.class);
+                Log.i("", album.toString());*/
+                Albums albums = gson.fromJson(json, Albums.class);
+                Log.i("", albums.toString());
             }
         });
     }
