@@ -3,7 +3,6 @@ package com.snowdream.wallpaper;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.snowdream.wallpaper.entity.Album;
 import com.snowdream.wallpaper.entity.Albums;
 import com.snowdream.wallpaper.net.AsyncHttpClient;
 
