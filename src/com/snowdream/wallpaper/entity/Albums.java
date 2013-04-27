@@ -19,7 +19,7 @@ public class Albums extends Object {
     @DatabaseField
     protected String created_at;
 
-    @DatabaseField
+    @DatabaseField(foreign = true)
     protected List<Album> albums;
 
     public Albums() {

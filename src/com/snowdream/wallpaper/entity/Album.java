@@ -19,7 +19,7 @@ public class Album extends Object {
     @DatabaseField
     protected String updated_at;
 
-    @DatabaseField
+    @DatabaseField(foreign = true)
     protected List<Image> images;
 
     public Album() {
