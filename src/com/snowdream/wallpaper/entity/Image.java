@@ -37,6 +37,7 @@ public class Image extends Object {
     protected Album album;
     
     public Image() {
+        super(TYPE_IMAGE);
         // ORMLite needs a no-arg constructor
     }
 

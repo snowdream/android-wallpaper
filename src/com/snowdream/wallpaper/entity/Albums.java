@@ -3,7 +3,6 @@ package com.snowdream.wallpaper.entity;
 
 import java.util.Collection;
 
-import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 
@@ -25,6 +24,7 @@ public class Albums extends Object {
     protected Collection<Album> albums;
 
     public Albums() {
+        super(TYPE_ALBUMS);
         // ORMLite needs a no-arg constructor
     }
 

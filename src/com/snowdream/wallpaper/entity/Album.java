@@ -28,9 +28,11 @@ public class Album extends Object {
     protected Albums albums;
     
     public Album() {
+        super(TYPE_ALBUM);
         // ORMLite needs a no-arg constructor
     }
 
+    
     public Album(Albums albums){
         this.albums = albums;
     }

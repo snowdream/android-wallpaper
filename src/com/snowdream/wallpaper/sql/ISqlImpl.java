@@ -2,13 +2,14 @@
 package com.snowdream.wallpaper.sql;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import android.content.Context;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.ForeignCollection;
 import com.snowdream.wallpaper.entity.Album;
 import com.snowdream.wallpaper.entity.Albums;
 import com.snowdream.wallpaper.entity.Image;
@@ -48,200 +49,216 @@ public class ISqlImpl implements ISql {
     }
 
     @Override
-    public void addAlbums(Albums albums) {
+    public void addAlbums(Albums albums) throws SQLException {
         if (albums == null) {
             return;
         }
 
-        try {
-            Dao<Albums, String> albumsDao = getHelper().getAlbumsDao();
+        Dao<Albums, String> albumsDao = getHelper().getAlbumsDao();
 
-            albumsDao.createOrUpdate(albums);
+        albumsDao.createOrUpdate(albums);
 
-            Collection<Album> tAlbums = albums.getAlbums();
+        Collection<Album> tAlbums = albums.getAlbums();
 
-            for (Album album : tAlbums) {
-                album.setAlbums(albums);
-                addAlbum(album);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for (Album album : tAlbums) {
+            album.setAlbums(albums);
+            addAlbum(album);
         }
     }
 
     @Override
-    public void updateAlbums(Albums albums) {
+    public void updateAlbums(Albums albums) throws SQLException {
         if (albums == null) {
             return;
         }
 
-        try {
-            Dao<Albums, String> albumsDao = getHelper().getAlbumsDao();
+        Dao<Albums, String> albumsDao = getHelper().getAlbumsDao();
 
-            albumsDao.update(albums);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        albumsDao.update(albums);
     }
 
     @Override
-    public void deleteAlbums(Albums albums) {
+    public void deleteAlbums(Albums albums) throws SQLException {
         if (albums == null) {
             return;
         }
 
-        try {
-            Dao<Albums, String> albumsDao = getHelper().getAlbumsDao();
+        Dao<Albums, String> albumsDao = getHelper().getAlbumsDao();
 
-            albumsDao.delete(albums);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        albumsDao.delete(albums);
     }
 
     @Override
-    public Albums queryAlbums(Albums albums) {
+    public Albums queryAlbums(Albums albums) throws SQLException {
         Albums talbums = null;
 
-        try {
-            Dao<Albums, String> albumsDao = getHelper().getAlbumsDao();
-
-            talbums = albumsDao.queryForSameId(albums);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (albums == null) {
+            return talbums;
         }
+
+        Dao<Albums, String> albumsDao = getHelper().getAlbumsDao();
+
+        talbums = albumsDao.queryForSameId(albums);
 
         return talbums;
     }
 
     @Override
-    public void addImage(Image image) {
+    public void addImage(Image image) throws SQLException {
         if (image == null) {
             return;
         }
 
-        try {
-            Dao<Image, String> imageDao = getHelper().getImageDao();
+        Dao<Image, String> imageDao = getHelper().getImageDao();
 
-            imageDao.createOrUpdate(image);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        imageDao.createOrUpdate(image);
     }
 
     @Override
-    public void updateImage(Image image) {
+    public void updateImage(Image image) throws SQLException {
         if (image == null) {
             return;
         }
 
-        try {
-            Dao<Image, String> imageDao = getHelper().getImageDao();
+        Dao<Image, String> imageDao = getHelper().getImageDao();
 
-            imageDao.update(image);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        imageDao.update(image);
     }
 
     @Override
-    public Image queryImage(Image image) {
+    public Image queryImage(Image image) throws SQLException {
         Image timage = null;
 
         if (image == null) {
             return timage;
         }
 
-        try {
-            Dao<Image, String> imageDao = getHelper().getImageDao();
+        Dao<Image, String> imageDao = getHelper().getImageDao();
 
-            timage = imageDao.queryForSameId(image);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        timage = imageDao.queryForSameId(image);
 
         return timage;
     }
 
     @Override
-    public void deleteImage(Image image) {
+    public void deleteImage(Image image) throws SQLException {
         if (image == null) {
             return;
         }
 
-        try {
-            Dao<Image, String> imageDao = getHelper().getImageDao();
+        Dao<Image, String> imageDao = getHelper().getImageDao();
 
-            imageDao.delete(image);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        imageDao.delete(image);
     }
 
     @Override
-    public void addAlbum(Album album) {
+    public void addAlbum(Album album) throws SQLException {
         if (album == null) {
             return;
         }
 
-        try {
-            Dao<Album, String> albumDao = getHelper().getAlbumDao();
+        Dao<Album, String> albumDao = getHelper().getAlbumDao();
 
-            albumDao.createOrUpdate(album);
+        albumDao.createOrUpdate(album);
 
-            Collection<Image> tImage = album.getImages();
+        Collection<Image> tImage = album.getImages();
 
-            for (Image image : tImage) {
-                image.setAlbum(album);
-                addImage(image);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for (Image image : tImage) {
+            image.setAlbum(album);
+            addImage(image);
         }
     }
 
     @Override
-    public void updateAlbum(Album album) {
+    public void updateAlbum(Album album) throws SQLException {
         if (album == null) {
             return;
         }
 
-        try {
-            Dao<Album, String> albumDao = getHelper().getAlbumDao();
+        Dao<Album, String> albumDao = getHelper().getAlbumDao();
 
-            albumDao.update(album);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        albumDao.update(album);
     }
 
     @Override
-    public Album queryAlbum(Album album) {
+    public Album queryAlbum(Album album) throws SQLException {
         Album talbum = null;
 
-        try {
-            Dao<Album, String> albumDao = getHelper().getAlbumDao();
-
-            talbum = albumDao.queryForSameId(album);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (album == null) {
+            return talbum;
         }
+
+        Dao<Album, String> albumDao = getHelper().getAlbumDao();
+
+        talbum = albumDao.queryForSameId(album);
 
         return talbum;
     }
 
     @Override
-    public void deleteAlbum(Album album) {
+    public void deleteAlbum(Album album) throws SQLException {
         if (album == null) {
             return;
         }
 
-        try {
-            Dao<Album, String> albumDao = getHelper().getAlbumDao();
+        Dao<Album, String> albumDao = getHelper().getAlbumDao();
 
-            albumDao.delete(album);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        albumDao.delete(album);
+    }
+
+    @Override
+    public List<Image> queryImagesFromAlbum(Album album) throws SQLException {
+        List<Image> list = null;
+        Album talbum = null;
+
+        if (album == null) {
+            return list;
         }
+
+        Dao<Album, String> albumDao = getHelper().getAlbumDao();
+
+        talbum = albumDao.queryForSameId(album);
+
+        if (talbum == null) {
+            return list;
+        }
+
+        list = new ArrayList<Image>();
+
+        for (Image image : talbum.getImages()) {
+            list.add(image);
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<Image> queryImagesFromAlbums(Albums albums) throws SQLException {
+        List<Image> list = null;
+        Albums talbums = null;
+
+        if (albums == null) {
+            return list;
+        }
+
+        Dao<Albums, String> albumsDao = getHelper().getAlbumsDao();
+
+        talbums = albumsDao.queryForSameId(albums);
+
+        if (talbums == null) {
+            return list;
+        }
+
+        list = new ArrayList<Image>();
+
+        for (Album album : talbums.getAlbums()) {
+            List<Image> alist = queryImagesFromAlbum(album);
+
+            if (alist != null) {
+                list.addAll(alist);
+            }
+        }
+
+        return list;
     }
 }
