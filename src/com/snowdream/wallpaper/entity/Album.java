@@ -1,11 +1,13 @@
 
 package com.snowdream.wallpaper.entity;
 
-import com.j256.ormlite.field.DatabaseField;
+import java.util.Collection;
 
-import java.util.List;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 
 public class Album extends Object {
+    public static final String ALBUMS_ID_FIELD_NAME = "albums_id";
 
     @DatabaseField
     protected String uuid;
@@ -19,10 +21,101 @@ public class Album extends Object {
     @DatabaseField
     protected String updated_at;
 
-    @DatabaseField(foreign = true)
-    protected List<Image> images;
-
+    @ForeignCollectionField(eager = false)
+    protected Collection<Image> images;
+    
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = ALBUMS_ID_FIELD_NAME)
+    protected Albums albums;
+    
     public Album() {
         // ORMLite needs a no-arg constructor
+    }
+
+    public Album(Albums albums){
+        this.albums = albums;
+    }
+    
+    /**
+     * @return the uuid
+     */
+    public String getUuid() {
+        return uuid;
+    }
+
+    /**
+     * @param uuid the uuid to set
+     */
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    /**
+     * @return the published
+     */
+    public String getPublished() {
+        return published;
+    }
+
+    /**
+     * @param published the published to set
+     */
+    public void setPublished(String published) {
+        this.published = published;
+    }
+
+    /**
+     * @return the created_by
+     */
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    /**
+     * @param created_by the created_by to set
+     */
+    public void setCreated_by(String created_by) {
+        this.created_by = created_by;
+    }
+
+    /**
+     * @return the updated_at
+     */
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    /**
+     * @param updated_at the updated_at to set
+     */
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    /**
+     * @return the images
+     */
+    public Collection<Image> getImages() {
+        return images;
+    }
+
+    /**
+     * @param images the images to set
+     */
+    public void setImages(Collection<Image> images) {
+        this.images = images;
+    }
+
+    /**
+     * @return the albums
+     */
+    public Albums getAlbums() {
+        return albums;
+    }
+
+    /**
+     * @param albums the albums to set
+     */
+    public void setAlbums(Albums albums) {
+        this.albums = albums;
     }
 }

@@ -10,4 +10,16 @@ public class Object {
     public Object() {
         // ORMLite needs a no-arg constructor
     }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    public boolean equals(Object other) {
+        if (other == null || other.getClass() != getClass()) {
+            return false;
+        }
+        return id.equals(other.id);
+    }
 }
