@@ -131,7 +131,7 @@ public class ITaskImpl implements ITask {
 
         StringBuffer buffer = new StringBuffer();
         buffer.append(INet.URL_ALBUM);
-        buffer.append(albums.getUuid());
+        buffer.append(album.getUuid());
         String url = buffer.toString();
 
         Album talbum = inet.getAlbumFromNet(url);

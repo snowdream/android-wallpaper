@@ -11,6 +11,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.snowdream.wallpaper.R;
 import com.snowdream.wallpaper.entity.Album;
 import com.snowdream.wallpaper.entity.Albums;
 import com.snowdream.wallpaper.entity.Image;
@@ -38,7 +39,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Image, String> imageDao = null;
 
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION,R.raw.ormlite_config);
     }
 
     /**

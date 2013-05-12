@@ -13,10 +13,19 @@ public class Album extends Object {
     protected String uuid;
 
     @DatabaseField
+    protected String name;
+    
+    @DatabaseField
     protected String published;
 
     @DatabaseField
     protected String created_by;
+
+    @DatabaseField
+    protected String updated_by;
+
+    @DatabaseField
+    protected String created_at;
 
     @DatabaseField
     protected String updated_at;
@@ -119,5 +128,53 @@ public class Album extends Object {
      */
     public void setAlbums(Albums albums) {
         this.albums = albums;
+    }
+
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    /**
+     * @return the updated_by
+     */
+    public String getUpdated_by() {
+        return updated_by;
+    }
+
+
+    /**
+     * @param updated_by the updated_by to set
+     */
+    public void setUpdated_by(String updated_by) {
+        this.updated_by = updated_by;
+    }
+
+
+    /**
+     * @return the created_at
+     */
+    public String getCreated_at() {
+        return created_at;
+    }
+
+
+    /**
+     * @param created_at the created_at to set
+     */
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 }
