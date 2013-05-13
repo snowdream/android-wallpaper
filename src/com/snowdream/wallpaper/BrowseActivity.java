@@ -1,19 +1,17 @@
 
 package com.snowdream.wallpaper;
 
-import com.loopj.android.image.SmartImageView;
-import com.snowdream.wallpaper.entity.Image;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
+
+import com.loopj.android.image.SmartImageView;
 
 /**
  * @author snowdream
  */
-public class ImageActivity extends Activity {
+public class BrowseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

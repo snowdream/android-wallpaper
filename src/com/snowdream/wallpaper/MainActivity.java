@@ -13,7 +13,7 @@ import android.widget.GridView;
 
 import com.github.snowdream.android.util.Log;
 import com.loopj.android.image.SmartImageView;
-import com.snowdream.wallpaper.adapter.ImageAdapter;
+import com.snowdream.wallpaper.adapter.BrowseAdapter;
 import com.snowdream.wallpaper.entity.Album;
 import com.snowdream.wallpaper.entity.Albums;
 import com.snowdream.wallpaper.entity.Image;
@@ -24,7 +24,7 @@ import com.snowdream.wallpaper.task.ITaskListener;
 public class MainActivity extends Activity {
     private GridView gridView = null;
 
-    private ImageAdapter adapter = null;
+    private BrowseAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
             @Override
             public void onSuccess(List<Image> images) {
                 Log.i("onSuccess" + images.toString());
-                adapter = new ImageAdapter(MainActivity.this, images);
+                adapter = new BrowseAdapter(MainActivity.this, images);
                 gridView.setAdapter(adapter);
             }
 
@@ -88,7 +88,7 @@ public class MainActivity extends Activity {
             @Override
             public void onSuccess(List<Image> images) {
                 Log.i("onSuccess" + images.toString());
-                adapter = new ImageAdapter(MainActivity.this, images);
+                adapter = new BrowseAdapter(MainActivity.this, images);
                 gridView.setAdapter(adapter);
             }
 
@@ -156,7 +156,7 @@ public class MainActivity extends Activity {
         }
 
         Intent intent = new Intent();
-        intent.setClass(this, ImageActivity.class);
+        intent.setClass(this, BrowseActivity.class);
         intent.putExtra("url", image.getUrl());
         startActivity(intent);
 

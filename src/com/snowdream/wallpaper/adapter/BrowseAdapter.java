@@ -21,12 +21,12 @@ import com.snowdream.wallpaper.entity.Image;
 /**
  * @author snowdream
  */
-public class ImageAdapter extends BaseAdapter {
+public class BrowseAdapter extends BaseAdapter {
     private List<Image> list = null;
 
     private Context mContext = null;
 
-    public ImageAdapter(Context context, List<Image> list) {
+    public BrowseAdapter(Context context, List<Image> list) {
         if (list != null && list.size() > 0) {
             this.list = list;
         }
