@@ -4,5 +4,6 @@
     <string name="app_name">snowdream wallpaper</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-
+    <!-- Content descriptions -->
+    <string name="descr_image">Image</string>
 </resources>

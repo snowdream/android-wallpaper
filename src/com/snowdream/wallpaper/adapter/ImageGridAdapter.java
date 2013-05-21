@@ -15,23 +15,28 @@ import android.widget.ImageView;
 
 import com.github.snowdream.android.util.Log;
 import com.loopj.android.image.SmartImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.snowdream.wallpaper.R;
 import com.snowdream.wallpaper.entity.Image;
 
 /**
  * @author snowdream
  */
-public class BrowseAdapter extends BaseAdapter {
+public class ImageGridAdapter extends BaseAdapter {
     private List<Image> list = null;
 
     private Context mContext = null;
+    
+    private DisplayImageOptions options = null;
 
-    public BrowseAdapter(Context context, List<Image> list) {
+    public ImageGridAdapter(Context context, List<Image> list,DisplayImageOptions options) {
         if (list != null && list.size() > 0) {
             this.list = list;
         }
 
-        mContext = context;
+        this.mContext = context;
+        this.options = options;
     }
 
     @Override
@@ -70,26 +75,18 @@ public class BrowseAdapter extends BaseAdapter {
             return null;
         }
 
-        ViewHolder holder = null;
+        final ImageView imageView;
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_main, null);
-            
-            holder = new ViewHolder();
-            holder.imageview = (SmartImageView) convertView.findViewById(R.id.my_image);
-            
-            convertView.setTag(holder);
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            imageView = (ImageView) inflater.inflate(R.layout.item_grid_image, parent, false);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            imageView = (ImageView) convertView;
         }
-        holder.imageview.setAdjustViewBounds(true);
-        holder.imageview.setImageUrl(image.getUrl());
-        holder.imageview.setTag(image);
 
-        return convertView;
+        ImageLoader.getInstance().displayImage(image.getUrl(), imageView, options);
+
+        return imageView;
     }
 
-    static class ViewHolder {
-        SmartImageView imageview;
-    }
 
 }
