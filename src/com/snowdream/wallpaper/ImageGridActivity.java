@@ -15,18 +15,17 @@
  *******************************************************************************/
 package com.snowdream.wallpaper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 
 import com.github.snowdream.android.util.Log;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -45,7 +44,8 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
 	String[] imageUrls;
 
 	DisplayImageOptions options;
-
+	ImageGridAdapter adapter = null;
+	List<Image> mImages = null;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,59 +74,30 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
 		});*/
 	}
 
+	@SuppressWarnings("unchecked")
 	private void startImagePagerActivity(int position) {
 		Intent intent = new Intent(this, ImagePagerActivity.class);
-		intent.putExtra(Extra.IMAGES, imageUrls);
+		intent.putParcelableArrayListExtra(Extra.IMAGES, (ArrayList<? extends Parcelable>)adapter.getList());
 		intent.putExtra(Extra.IMAGE_POSITION, position);
 		startActivity(intent);
 	}
 
-	public class ImageAdapter extends BaseAdapter {
-		@Override
-		public int getCount() {
-			return imageUrls.length;
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return null;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			final ImageView imageView;
-			if (convertView == null) {
-				imageView = (ImageView) getLayoutInflater().inflate(R.layout.item_grid_image, parent, false);
-			} else {
-				imageView = (ImageView) convertView;
-			}
-
-			imageLoader.displayImage(imageUrls[position], imageView, options);
-
-			return imageView;
-		}
-	}
-	
-
     public void test1() {
 
         Albums albums = new Albums();
-        albums.setId("1");
-        albums.setUuid("c75dcaac-bb0d-11e2-8ef1-047d7b4d0279");
-        albums.setName("影视");
+        albums.setId("58");
+        albums.setUuid("82c78f02-8443-11e2-ae33-00e0814b024a");
+        albums.setName("test");
 
         ITaskImpl iTaskImpl = new ITaskImpl(this, albums, new ITaskListener() {
 
             @Override
             public void onSuccess(List<Image> images) {
+            	mImages = images;
                 Log.i("onSuccess" + images.toString());
+                adapter = new ImageGridAdapter(ImageGridActivity.this, images,options);
                 listView = (GridView) findViewById(R.id.gridview);
-                ((GridView) listView).setAdapter(new ImageGridAdapter(ImageGridActivity.this, images,options));
+                ((GridView) listView).setAdapter(adapter);
                 listView.setOnItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -2,9 +2,12 @@
 package com.snowdream.wallpaper.entity;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.j256.ormlite.field.DatabaseField;
 
-public class Object {
+public class Object implements Parcelable{
     @DatabaseField(id = true)
     protected String id;
     
@@ -37,6 +40,28 @@ public class Object {
         this.id = id;
     }
 
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel out, int flags) {
+		out.writeString(id);
+	}
+
+	public static final Parcelable.Creator<Object> CREATOR = new Parcelable.Creator<Object>() {
+		public Object createFromParcel(Parcel in) {
+			return new Object(in);
+		}
+
+		public Object[] newArray(int size) {
+			return new Object[size];
+		}
+	};
+
+	private Object(Parcel in) {
+		id = in.readString();
+	}
+	
     @Override
     public int hashCode() {
         return id.hashCode();

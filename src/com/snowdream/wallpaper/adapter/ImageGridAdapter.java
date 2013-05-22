@@ -39,6 +39,10 @@ public class ImageGridAdapter extends BaseAdapter {
         this.options = options;
     }
 
+    public List<Image> getList() {
+		return list;
+	}
+    
     @Override
     public int getCount() {
         int size = 0;
@@ -83,7 +87,7 @@ public class ImageGridAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        ImageLoader.getInstance().displayImage(image.getUrl(), imageView, options);
+        ImageLoader.getInstance().displayImage(image.getThumb(), imageView, options);
 
         return imageView;
     }

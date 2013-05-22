@@ -15,6 +15,8 @@
  *******************************************************************************/
 package com.snowdream.wallpaper;
 
+import java.util.List;
+
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -33,6 +35,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.snowdream.wallpaper.Constants.Extra;
+import com.snowdream.wallpaper.entity.Image;
 
 /**
  * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
@@ -50,7 +53,7 @@ public class ImagePagerActivity extends BaseActivity {
 		setContentView(R.layout.activity_image_pager);
 
 		Bundle bundle = getIntent().getExtras();
-		String[] imageUrls = bundle.getStringArray(Extra.IMAGES);
+		//List<Image> images = bundle.getParcelableArrayList(Extra.IMAGES);
 		int pagerPosition = bundle.getInt(Extra.IMAGE_POSITION, 0);
 
 		if (savedInstanceState != null) {
@@ -68,7 +71,7 @@ public class ImagePagerActivity extends BaseActivity {
 			.build();
 
 		pager = (ViewPager) findViewById(R.id.pager);
-		pager.setAdapter(new ImagePagerAdapter(imageUrls));
+		//pager.setAdapter(new ImagePagerAdapter(imageUrls));
 		pager.setCurrentItem(pagerPosition);
 	}
 
