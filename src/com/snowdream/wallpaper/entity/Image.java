@@ -9,34 +9,34 @@ public class Image extends Object implements Parcelable {
 	public static final String ALBUM_ID_FIELD_NAME = "album_id";
 
 	@DatabaseField
-	protected String title;
+	protected String title = null;
 
 	@DatabaseField
-	protected String caption;
+	protected String caption = null;
 
 	@DatabaseField
-	protected String file_name;
+	protected String file_name = null;
 
 	@DatabaseField
-	protected String raw_name;
+	protected String raw_name = null;
 
 	@DatabaseField
-	protected String file_ext;
+	protected String file_ext = null;
 
 	@DatabaseField
-	protected String path;
+	protected String path = null;
 
 	@DatabaseField
-	protected String created_at;
+	protected String created_at = null;
 
 	@DatabaseField
-	protected String url;
+	protected String url = null;
 
 	@DatabaseField
-	protected String thumb;
+	protected String thumb = null;
 
 	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = ALBUM_ID_FIELD_NAME)
-	protected Album album;
+	protected Album album = null;
 
 	public Image() {
 		super(TYPE_IMAGE);
@@ -236,6 +236,6 @@ public class Image extends Object implements Parcelable {
 		url = in.readString();
 		thumb = in.readString();
 		path = in.readString();
-		album = in.readParcelable();
+		album = in.readParcelable(null);
 	}
 }
