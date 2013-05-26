@@ -74,7 +74,6 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
 		});*/
 	}
 
-	@SuppressWarnings("unchecked")
 	private void startImagePagerActivity(int position) {
 		Intent intent = new Intent(this, ImagePagerActivity.class);
 		intent.putParcelableArrayListExtra(Extra.IMAGES, (ArrayList<? extends Parcelable>)adapter.getList());

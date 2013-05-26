@@ -213,6 +213,7 @@ public class Image extends Object implements Parcelable {
 		out.writeString(thumb);
 		out.writeString(path);
 		out.writeParcelable(album, 0);
+		out.write
 	}
 
 	public static final Parcelable.Creator<Image> CREATOR = new Parcelable.Creator<Image>() {

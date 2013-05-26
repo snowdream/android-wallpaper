@@ -14,7 +14,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.github.snowdream.android.util.Log;
-import com.loopj.android.image.SmartImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.snowdream.wallpaper.R;

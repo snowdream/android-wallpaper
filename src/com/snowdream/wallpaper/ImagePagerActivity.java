@@ -53,7 +53,7 @@ public class ImagePagerActivity extends BaseActivity {
 		setContentView(R.layout.activity_image_pager);
 
 		Bundle bundle = getIntent().getExtras();
-		//List<Image> images = bundle.getParcelableArrayList(Extra.IMAGES);
+		List<Image> images = bundle.getParcelableArrayList(Extra.IMAGES);
 		int pagerPosition = bundle.getInt(Extra.IMAGE_POSITION, 0);
 
 		if (savedInstanceState != null) {
