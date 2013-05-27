@@ -16,8 +16,6 @@
 package com.snowdream.wallpaper;
 
 import android.app.Activity;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
