@@ -212,8 +212,7 @@ public class Image extends Object implements Parcelable {
 		out.writeString(url);
 		out.writeString(thumb);
 		out.writeString(path);
-		out.writeParcelable(album, 0);
-		out.write
+        //out.writeParcelable(album, 0);
 	}
 
 	public static final Parcelable.Creator<Image> CREATOR = new Parcelable.Creator<Image>() {
@@ -237,6 +236,6 @@ public class Image extends Object implements Parcelable {
 		url = in.readString();
 		thumb = in.readString();
 		path = in.readString();
-		album = in.readParcelable(null);
+        //album = in.readParcelable(null);
 	}
 }
