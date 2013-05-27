@@ -1,7 +1,11 @@
 
 package com.snowdream.wallpaper.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
@@ -10,42 +14,41 @@ public class Album extends Object {
     public static final String ALBUMS_ID_FIELD_NAME = "albums_id";
 
     @DatabaseField
-    protected String uuid;
+    protected String uuid = null;
 
     @DatabaseField
-    protected String name;
-    
-    @DatabaseField
-    protected String published;
+    protected String name = null;
 
     @DatabaseField
-    protected String created_by;
+    protected String published = null;
 
     @DatabaseField
-    protected String updated_by;
+    protected String created_by = null;
 
     @DatabaseField
-    protected String created_at;
+    protected String updated_by = null;
 
     @DatabaseField
-    protected String updated_at;
+    protected String created_at = null;
+
+    @DatabaseField
+    protected String updated_at = null;
 
     @ForeignCollectionField(eager = false)
-    protected Collection<Image> images;
-    
+    protected Collection<Image> images = null;
+
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = ALBUMS_ID_FIELD_NAME)
-    protected Albums albums;
-    
+    protected Albums albums = null;
+
     public Album() {
         super(TYPE_ALBUM);
         // ORMLite needs a no-arg constructor
     }
 
-    
-    public Album(Albums albums){
+    public Album(Albums albums) {
         this.albums = albums;
     }
-    
+
     /**
      * @return the uuid
      */
@@ -130,14 +133,12 @@ public class Album extends Object {
         this.albums = albums;
     }
 
-
     /**
      * @return the name
      */
     public String getName() {
         return name;
     }
-
 
     /**
      * @param name the name to set
@@ -146,14 +147,12 @@ public class Album extends Object {
         this.name = name;
     }
 
-
     /**
      * @return the updated_by
      */
     public String getUpdated_by() {
         return updated_by;
     }
-
 
     /**
      * @param updated_by the updated_by to set
@@ -162,7 +161,6 @@ public class Album extends Object {
         this.updated_by = updated_by;
     }
 
-
     /**
      * @return the created_at
      */
@@ -170,11 +168,65 @@ public class Album extends Object {
         return created_at;
     }
 
-
     /**
      * @param created_at the created_at to set
      */
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(uuid);
+        out.writeString(name);
+        out.writeString(published);
+        out.writeString(created_by);
+        out.writeString(updated_by);
+        out.writeString(created_at);
+        out.writeString(updated_at);
+
+        if (images != null) {
+            out.writeInt(images.size());
+
+            for (Image image : images) {
+                out.writeParcelable(image, flags);
+            }
+        }
+
+        out.writeParcelable(albums, 0);
+    }
+
+    public static final Parcelable.Creator<Album> CREATOR = new Parcelable.Creator<Album>() {
+        public Album createFromParcel(Parcel in) {
+            return new Album(in);
+        }
+
+        public Album[] newArray(int size) {
+            return new Album[size];
+        }
+    };
+
+    private Album(Parcel in) {
+        uuid = in.readString();
+        name = in.readString();
+        published = in.readString();
+        created_by = in.readString();
+        updated_by = in.readString();
+        created_at = in.readString();
+        updated_at = in.readString();
+
+        int count = in.readInt();
+        if (count > 0) {
+            images = new ArrayList<Image>();
+        }
+
+        for (int i = 0; i < count; i++) {
+            images.add((Image) in.readParcelable(null));
+        }
+
+        in.readParcelable(null);
     }
 }
