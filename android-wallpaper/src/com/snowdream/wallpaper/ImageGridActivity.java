@@ -84,9 +84,9 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
     public void test1() {
 
         Albums albums = new Albums();
-        albums.setId("58");
-        albums.setUuid("82c78f02-8443-11e2-ae33-00e0814b024a");
-        albums.setName("test");
+        albums.setId("1");
+        albums.setUuid("c75dcaac-bb0d-11e2-8ef1-047d7b4d0279");
+        albums.setName("movie");
 
         ITaskImpl iTaskImpl = new ITaskImpl(this, albums, new ITaskListener() {
 
