@@ -107,6 +107,7 @@ public class Albums extends Object implements Parcelable {
     }
 
     public void writeToParcel(Parcel out, int flags) {
+        super.writeToParcel(out, flags);
         out.writeString(name);
         out.writeString(created_by);
         out.writeString(uuid);
@@ -132,6 +133,7 @@ public class Albums extends Object implements Parcelable {
     };
 
     private Albums(Parcel in) {
+        super(in);
         name = in.readString();
         created_by = in.readString();
         uuid = in.readString();
