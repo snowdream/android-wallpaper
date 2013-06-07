@@ -71,7 +71,7 @@ public class ImagePagerActivity extends BaseActivity {
 			.build();
 
 		pager = (ViewPager) findViewById(R.id.pager);
-		//pager.setAdapter(new ImagePagerAdapter(imageUrls));
+		pager.setAdapter(new ImagePagerAdapter(images));
 		pager.setCurrentItem(pagerPosition);
 	}
 
@@ -82,10 +82,10 @@ public class ImagePagerActivity extends BaseActivity {
 
 	private class ImagePagerAdapter extends PagerAdapter {
 
-		private String[] images;
+		private List<Image> images;
 		private LayoutInflater inflater;
 
-		ImagePagerAdapter(String[] images) {
+		ImagePagerAdapter(List<Image> images) {
 			this.images = images;
 			inflater = getLayoutInflater();
 		}
@@ -101,7 +101,7 @@ public class ImagePagerActivity extends BaseActivity {
 
 		@Override
 		public int getCount() {
-			return images.length;
+			return images.size();
 		}
 
 		@Override
@@ -109,8 +109,9 @@ public class ImagePagerActivity extends BaseActivity {
 			View imageLayout = inflater.inflate(R.layout.item_pager_image, view, false);
 			ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
 			final ProgressBar spinner = (ProgressBar) imageLayout.findViewById(R.id.loading);
+			final String imgUrl = images.get(position).getUrl();
 
-			imageLoader.displayImage(images[position], imageView, options, new SimpleImageLoadingListener() {
+			imageLoader.displayImage(imgUrl, imageView, options, new SimpleImageLoadingListener() {
 				@Override
 				public void onLoadingStarted(String imageUri, View view) {
 					spinner.setVisibility(View.VISIBLE);
