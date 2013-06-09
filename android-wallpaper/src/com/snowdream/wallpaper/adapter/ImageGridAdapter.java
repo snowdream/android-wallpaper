@@ -37,7 +37,7 @@ public class ImageGridAdapter extends BaseAdapter {
             this.list = list;
         }
 
-        this.mContext = context;
+        this.mContext = context.getApplicationContext();
         this.options = options;
     }
 
