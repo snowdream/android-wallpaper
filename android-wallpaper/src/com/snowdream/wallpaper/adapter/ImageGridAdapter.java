@@ -29,6 +29,9 @@ public class ImageGridAdapter extends BaseAdapter {
     
     private DisplayImageOptions options = null;
 
+    public ImageGridAdapter(){
+    }
+    
     public ImageGridAdapter(Context context, List<Image> list,DisplayImageOptions options) {
         if (list != null && list.size() > 0) {
             this.list = list;
@@ -87,6 +90,7 @@ public class ImageGridAdapter extends BaseAdapter {
         }
 
         ImageLoader.getInstance().displayImage(image.getThumb(), imageView, options);
+        imageView.setTag(image);
 
         return imageView;
     }

@@ -28,7 +28,8 @@ public final class Constants {
 	}
 	
 	public static class Extra {
-		public static final String IMAGES = "com.snowdream.wallpaper.IMAGES";
-		public static final String IMAGE_POSITION = "com.snowdream.wallpaper.IMAGE_POSITION";
+		public static final String ALBUM = "ALBUM";
+		public static final String IMAGES = "IMAGES";
+		public static final String IMAGE_POSITION = "IMAGE_POSITION";
 	}
 }

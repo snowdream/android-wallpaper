@@ -5,6 +5,7 @@ import java.io.File;
 import android.app.Application;
 import android.content.Context;
 import android.os.Build;
+import android.os.Environment;
 import android.os.StrictMode;
 
 import com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiscCache;
@@ -42,7 +43,8 @@ public class BaseApplication extends Application {
 		// or you can create default configuration by
 		// ImageLoaderConfiguration.createDefault(this);
 		// method.
-		File cacheDir = StorageUtils.getCacheDirectory(context);
+		String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/wallpaper";
+		File cacheDir = StorageUtils.getOwnCacheDirectory(context, path);
 
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
 				context).memoryCache(new WeakMemoryCache())

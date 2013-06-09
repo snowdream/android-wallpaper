@@ -19,12 +19,14 @@ package com.snowdream.wallpaper;
 import android.os.Bundle;
 import android.widget.AbsListView;
 
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.PauseOnScrollListener;
 
 /**
  * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
  */
-public class AbsListViewBaseActivity extends BaseActivity {
+public class AbsListViewBaseActivity extends SlidingFragmentActivity {
 
     protected static final String STATE_PAUSE_ON_SCROLL = "STATE_PAUSE_ON_SCROLL";
 
@@ -35,6 +37,8 @@ public class AbsListViewBaseActivity extends BaseActivity {
     protected boolean pauseOnScroll = false;
 
     protected boolean pauseOnFling = true;
+    
+	protected ImageLoader imageLoader = ImageLoader.getInstance();
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {

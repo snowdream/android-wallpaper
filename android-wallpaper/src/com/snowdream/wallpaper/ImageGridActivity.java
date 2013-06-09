@@ -21,13 +21,17 @@ import java.util.List;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
+import com.actionbarsherlock.view.MenuItem;
 import com.github.snowdream.android.util.Log;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.snowdream.wallpaper.Constants.Extra;
 import com.snowdream.wallpaper.adapter.ImageGridAdapter;
@@ -41,87 +45,87 @@ import com.snowdream.wallpaper.task.ITaskListener;
  */
 public class ImageGridActivity extends AbsListViewBaseActivity {
 
-	String[] imageUrls;
-
-	DisplayImageOptions options;
 	ImageGridAdapter adapter = null;
 	List<Image> mImages = null;
+	
+	private Fragment mContent;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_image_grid);
+		setTitle(R.string.app_name);
+
+		setContentView(R.layout.responsive_content_frame);
+
+		// check if the content frame contains the menu frame
+		if (findViewById(R.id.menu_frame) == null) {
+			setBehindContentView(R.layout.menu_frame);
+			getSlidingMenu().setSlidingEnabled(true);
+			getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+			// show home as up so we can toggle
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		} else {
+			// add a dummy view
+			View v = new View(this);
+			setBehindContentView(v);
+			getSlidingMenu().setSlidingEnabled(false);
+			getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+		}
+
+		// set the Above View Fragment
+		if (savedInstanceState != null)
+			mContent = getSupportFragmentManager().getFragment(savedInstanceState, "mContent");
+		if (mContent == null)
+			mContent = new ImageGridFragment();	
+		getSupportFragmentManager()
+		.beginTransaction()
+		.replace(R.id.content_frame, mContent)
+		.commit();
+
+		// set the Behind View Fragment
+		getSupportFragmentManager()
+		.beginTransaction()
+		.replace(R.id.menu_frame, new ImageMenuFragment())
+		.commit();
+
+		// customize the SlidingMenu
+		SlidingMenu sm = getSlidingMenu();
+		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		sm.setShadowWidthRes(R.dimen.shadow_width);
+		sm.setShadowDrawable(R.drawable.shadow);
+		sm.setBehindScrollScale(0.25f);
+		sm.setFadeDegree(0.25f);
 		
 	    Log.setTag("Wallpaper");
         Log.setEnabled(true);
-        test1();
+	}
 
-		options = new DisplayImageOptions.Builder()
-			.showStubImage(R.drawable.ic_stub)
-			.showImageForEmptyUri(R.drawable.ic_empty)
-			.showImageOnFail(R.drawable.ic_error)
-			.cacheInMemory()
-			.cacheOnDisc()
-			.bitmapConfig(Bitmap.Config.RGB_565)
-			.build();
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			toggle();
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
-/*		listView = (GridView) findViewById(R.id.gridview);
-		((GridView) listView).setAdapter(new ImageAdapter());
-		listView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				startImagePagerActivity(position);
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		getSupportFragmentManager().putFragment(outState, "mContent", mContent);
+	}
+
+	public void switchContent(final Fragment fragment) {
+		mContent = fragment;
+		getSupportFragmentManager()
+		.beginTransaction()
+		.replace(R.id.content_frame, fragment)
+		.commit();
+		Handler h = new Handler();
+		h.postDelayed(new Runnable() {
+			public void run() {
+				getSlidingMenu().showContent();
 			}
-		});*/
-	}
-
-	private void startImagePagerActivity(int position) {
-		Intent intent = new Intent(this, ImagePagerActivity.class);
-		intent.putParcelableArrayListExtra(Extra.IMAGES, (ArrayList<? extends Parcelable>)adapter.getList());
-		intent.putExtra(Extra.IMAGE_POSITION, position);
-		startActivity(intent);
-	}
-
-    public void test1() {
-
-        Albums albums = new Albums();
-        albums.setId("58");
-        albums.setUuid("82c78f02-8443-11e2-ae33-00e0814b024a");
-        albums.setName("test");
-
-        ITaskImpl iTaskImpl = new ITaskImpl(this, albums, new ITaskListener() {
-
-            @Override
-            public void onSuccess(List<Image> images) {
-            	mImages = images;
-                Log.i("onSuccess" + images.toString());
-                adapter = new ImageGridAdapter(ImageGridActivity.this, images,options);
-                listView = (GridView) findViewById(R.id.gridview);
-                ((GridView) listView).setAdapter(adapter);
-                listView.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        startImagePagerActivity(position);
-                    }
-                });
-            }
-
-            @Override
-            public void onStart() {
-                Log.i("onStart");
-            }
-
-            @Override
-            public void onFinish() {
-                Log.i("onFinish");
-            }
-
-            @Override
-            public void onFailed(Exception e) {
-                Log.e("onFailed :" + e.toString());
-            }
-        });
-
-        new Thread(iTaskImpl).start();
-
-    }
+		}, 50);
+	}	
 }
