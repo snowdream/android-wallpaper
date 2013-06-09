@@ -2,6 +2,7 @@ package com.snowdream.wallpaper.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Parcelable;
@@ -18,6 +19,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
+import com.snowdream.wallpaper.ImagePagerActivity;
 import com.snowdream.wallpaper.R;
 import com.snowdream.wallpaper.entity.Image;
 
@@ -50,12 +52,28 @@ public class ImagePagerAdapter extends PagerAdapter {
 
 	@Override
 	public Object instantiateItem(ViewGroup view, int position) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
+		LayoutInflater inflater = LayoutInflater.from(mContext);
 		View imageLayout = inflater.inflate(R.layout.item_pager_image, view,
 				false);
 		ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
-//		
-		
+		imageView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mContext == null) {
+					return;
+				}
+				
+				Activity activity = (Activity)mContext;
+				
+				if (!(activity instanceof ImagePagerActivity)) {
+					return;
+				}
+				
+				((ImagePagerActivity)activity).onImageClick(v);
+
+			}
+		});
+
 		final ProgressBar spinner = (ProgressBar) imageLayout
 				.findViewById(R.id.loading);
 		final String imgUrl = images.get(position).getUrl();
