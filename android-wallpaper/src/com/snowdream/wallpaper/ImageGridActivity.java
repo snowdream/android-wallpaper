@@ -15,30 +15,18 @@
  *******************************************************************************/
 package com.snowdream.wallpaper;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
 
 import com.actionbarsherlock.view.MenuItem;
 import com.github.snowdream.android.util.Log;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.snowdream.wallpaper.Constants.Extra;
 import com.snowdream.wallpaper.adapter.ImageGridAdapter;
-import com.snowdream.wallpaper.entity.Albums;
 import com.snowdream.wallpaper.entity.Image;
-import com.snowdream.wallpaper.task.ITaskImpl;
-import com.snowdream.wallpaper.task.ITaskListener;
 
 /**
  * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
@@ -114,6 +102,7 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
 		super.onSaveInstanceState(outState);
 		getSupportFragmentManager().putFragment(outState, "mContent", mContent);
 	}
+
 
 	public void switchContent(final Fragment fragment) {
 		mContent = fragment;

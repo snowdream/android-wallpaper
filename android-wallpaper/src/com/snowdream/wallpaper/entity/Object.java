@@ -75,7 +75,7 @@ public class Object implements Parcelable {
         }
     };
 
-    private Object(Parcel in) {
+    protected Object(Parcel in) {
         id = in.readString();
     }
 

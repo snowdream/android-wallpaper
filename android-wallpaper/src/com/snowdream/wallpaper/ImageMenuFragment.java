@@ -53,6 +53,16 @@ public class ImageMenuFragment extends ListFragment {
 
 		ListAdapter adapter = new ImageMenuAdapter(inflater, list);
 		setListAdapter(adapter);
+		
+		//init data
+		Fragment newContent = new ImageGridFragment();
+
+		Bundle bundle = new Bundle();
+		bundle.putParcelable(Extra.ALBUM, a1);
+		newContent.setArguments(bundle);
+
+		if (newContent != null)
+			switchFragment(newContent);
 	}
 
 	@Override

@@ -180,6 +180,7 @@ public class Album extends Object {
     }
 
     public void writeToParcel(Parcel out, int flags) {
+        super.writeToParcel(out, flags);
         out.writeString(uuid);
         out.writeString(name);
         out.writeString(published);
@@ -210,6 +211,7 @@ public class Album extends Object {
     };
 
     private Album(Parcel in) {
+        super(in);
         uuid = in.readString();
         name = in.readString();
         published = in.readString();
