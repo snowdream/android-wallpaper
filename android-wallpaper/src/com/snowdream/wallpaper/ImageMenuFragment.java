@@ -34,21 +34,21 @@ public class ImageMenuFragment extends ListFragment {
 		List<Album> list = new ArrayList<Album>();
 
 		Album a1 = new Album();
-		a1.setId("2");
-		a1.setUuid("6fdac02f-d0b4-11e2-83ff-000c293c165a");
-		a1.setName("1");
+		a1.setId("3");
+		a1.setUuid("e80e0099-bb0e-11e2-8ef1-047d7b4d0279");
+		a1.setName("爱情公寓手机壁纸下载");
 		list.add(a1);
 
 		Album a2 = new Album();
-		a2.setId("3");
-		a2.setUuid("eb6f46e9-d0b7-11e2-8fe6-000c293c165a");
-		a2.setName("2");
+		a2.setId("1");
+		a2.setUuid("b3d184d3-bb0e-11e2-8ef1-047d7b4d0279");
+		a2.setName("经典影视画面手机壁纸壁纸");
 		list.add(a2);
 
 		Album a3 = new Album();
-		a3.setId("4");
-		a3.setUuid("96fba1be-d0b8-11e2-8fe6-000c293c165a");
-		a3.setName("3");
+		a3.setId("5");
+		a3.setUuid("3c137887-bbe2-11e2-b886-047d7b4d0279");
+		a3.setName("梅西壁纸");
 		list.add(a3);
 
 		ListAdapter adapter = new ImageMenuAdapter(inflater, list);
