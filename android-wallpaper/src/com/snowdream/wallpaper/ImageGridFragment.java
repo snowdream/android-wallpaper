@@ -62,7 +62,7 @@ public class ImageGridFragment extends Fragment {
     private void initData() {
         options = new DisplayImageOptions.Builder().showStubImage(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty).showImageOnFail(R.drawable.ic_error)
-                .cacheInMemory().cacheOnDisc().bitmapConfig(Bitmap.Config.RGB_565).build();
+                .cacheInMemory().cacheOnDisc().bitmapConfig(Bitmap.Config.ARGB_8888).build();
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
