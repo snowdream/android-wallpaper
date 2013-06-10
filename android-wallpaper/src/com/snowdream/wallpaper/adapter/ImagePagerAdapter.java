@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.github.snowdream.android.util.Log;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -74,8 +74,8 @@ public class ImagePagerAdapter extends PagerAdapter {
 			}
 		});
 
-		final ProgressBar spinner = (ProgressBar) imageLayout
-				.findViewById(R.id.loading);
+		final RelativeLayout spinner = (RelativeLayout) imageLayout
+				.findViewById(R.id.rl_loading);
 		final String imgUrl = images.get(position).getUrl();
 
 		ImageLoader.getInstance().displayImage(imgUrl, imageView, options,

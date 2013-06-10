@@ -12,11 +12,24 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/descr_image" />
 
-    <ProgressBar
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
+    <RelativeLayout
+        android:id="@+id/rl_loading"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loading"
+            android:layout_centerHorizontal="true"
+            layout="@layout/widget_admob" />
+    </RelativeLayout>
 
 </FrameLayout>
