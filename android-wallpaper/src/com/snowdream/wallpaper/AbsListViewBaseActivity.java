@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2011-2013 Sergey Tarasevich
+ * Copyright (C) 2013 Snowdream Mobile
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,15 @@ package com.snowdream.wallpaper;
 import android.os.Bundle;
 import android.widget.AbsListView;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.PauseOnScrollListener;
 
 /**
- * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
+ * @author snowdream <yanghui1986527@gmail.com>
+ * @date 2013-6-10
+ * @version v1.0
  */
 public class AbsListViewBaseActivity extends SlidingFragmentActivity {
 
@@ -37,8 +40,8 @@ public class AbsListViewBaseActivity extends SlidingFragmentActivity {
     protected boolean pauseOnScroll = false;
 
     protected boolean pauseOnFling = true;
-    
-	protected ImageLoader imageLoader = ImageLoader.getInstance();
+
+    protected ImageLoader imageLoader = ImageLoader.getInstance();
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -64,6 +67,7 @@ public class AbsListViewBaseActivity extends SlidingFragmentActivity {
         outState.putBoolean(STATE_PAUSE_ON_SCROLL, pauseOnScroll);
         outState.putBoolean(STATE_PAUSE_ON_FLING, pauseOnFling);
     }
+
     /*
      * @Override public boolean onPrepareOptionsMenu(Menu menu) { MenuItem
      * pauseOnScrollItem = menu.findItem(R.id.item_pause_on_scroll);
@@ -79,4 +83,16 @@ public class AbsListViewBaseActivity extends SlidingFragmentActivity {
      * item.setChecked(pauseOnFling); applyScrollListener(); return true;
      * default: return super.onOptionsItemSelected(item); } }
      */
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EasyTracker.getInstance().activityStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EasyTracker.getInstance().activityStop(this);
+    }
 }

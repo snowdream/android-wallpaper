@@ -1,6 +1,18 @@
-/**
- * 
- */
+/*******************************************************************************
+ * Copyright (C) 2013 Snowdream Mobile
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
 
 package com.snowdream.wallpaper.adapter;
 
@@ -16,71 +28,74 @@ import com.github.snowdream.android.util.Log;
 import com.snowdream.wallpaper.entity.Album;
 
 /**
- * @author snowdream
+ * @author snowdream <yanghui1986527@gmail.com>
+ * @date 2013-6-10
+ * @version v1.0
  */
 public class ImageMenuAdapter extends BaseAdapter {
-	private List<Album> list = null;
-	private LayoutInflater mInflater = null;
+    private List<Album> list = null;
 
-	public ImageMenuAdapter(LayoutInflater inflater, List<Album> list) {
-		if (list != null && list.size() > 0) {
-			this.list = list;
-		}
+    private LayoutInflater mInflater = null;
 
-		this.mInflater = inflater;
-	}
+    public ImageMenuAdapter(LayoutInflater inflater, List<Album> list) {
+        if (list != null && list.size() > 0) {
+            this.list = list;
+        }
 
-	public List<Album> getList() {
-		return list;
-	}
+        this.mInflater = inflater;
+    }
 
-	@Override
-	public int getCount() {
-		int size = 0;
+    public List<Album> getList() {
+        return list;
+    }
 
-		if (list != null) {
-			size = list.size();
-		}
+    @Override
+    public int getCount() {
+        int size = 0;
 
-		return size;
-	}
+        if (list != null) {
+            size = list.size();
+        }
 
-	@Override
-	public Album getItem(int position) {
-		Album album = null;
+        return size;
+    }
 
-		if (list != null && position < list.size()) {
-			album = list.get(position);
-		}
+    @Override
+    public Album getItem(int position) {
+        Album album = null;
 
-		return album;
-	}
+        if (list != null && position < list.size()) {
+            album = list.get(position);
+        }
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+        return album;
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		Album album = getItem(position);
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-		if (album == null) {
-			Log.w("The Album is null!");
-			return null;
-		}
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        Album album = getItem(position);
 
-		final TextView textView;
-		if (convertView == null) {
-			textView = (TextView) mInflater.inflate(
-					android.R.layout.simple_list_item_1, parent, false);
-		} else {
-			textView = (TextView) convertView;
-		}
+        if (album == null) {
+            Log.w("The Album is null!");
+            return null;
+        }
 
-		textView.setText(album.getName());
-		textView.setTag(album);
+        final TextView textView;
+        if (convertView == null) {
+            textView = (TextView) mInflater.inflate(android.R.layout.simple_list_item_1, parent,
+                    false);
+        } else {
+            textView = (TextView) convertView;
+        }
 
-		return textView;
-	}
+        textView.setText(album.getName());
+        textView.setTag(album);
+
+        return textView;
+    }
 }

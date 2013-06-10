@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2011-2013 Sergey Tarasevich
+ * Copyright (C) 2013 Snowdream Mobile
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
+
 package com.snowdream.wallpaper;
 
 /**
- * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
+ * @author snowdream <yanghui1986527@gmail.com>
+ * @date 2013-6-10
+ * @version v1.0
  */
 public final class Constants {
 
-	private Constants() {
-	}
+    private Constants() {
+    }
 
-	public static class Config {
-		public static final boolean DEVELOPER_MODE = false;
-	}
-	
-	public static class Extra {
-		public static final String ALBUM = "ALBUM";
-		public static final String IMAGES = "IMAGES";
-		public static final String IMAGE_POSITION = "IMAGE_POSITION";
-	}
+    public static class Config {
+        public static final boolean DEVELOPER_MODE = false;
+    }
+
+    public static class Extra {
+        public static final String ALBUM = "ALBUM";
+
+        public static final String IMAGES = "IMAGES";
+
+        public static final String IMAGE_POSITION = "IMAGE_POSITION";
+    }
 }

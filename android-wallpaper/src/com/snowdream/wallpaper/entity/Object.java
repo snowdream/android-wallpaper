@@ -21,6 +21,11 @@ import android.os.Parcelable;
 
 import com.j256.ormlite.field.DatabaseField;
 
+/**
+ * @author snowdream <yanghui1986527@gmail.com>
+ * @date 2013-6-10
+ * @version v1.0
+ */
 public class Object implements Parcelable {
     @DatabaseField(id = true)
     protected String id = null;

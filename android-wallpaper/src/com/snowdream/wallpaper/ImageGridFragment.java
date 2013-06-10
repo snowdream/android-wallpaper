@@ -1,3 +1,19 @@
+/*******************************************************************************
+ * Copyright (C) 2013 Snowdream Mobile
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
+
 package com.snowdream.wallpaper;
 
 import java.util.ArrayList;
@@ -25,109 +41,108 @@ import com.snowdream.wallpaper.entity.Image;
 import com.snowdream.wallpaper.task.ITaskImpl;
 import com.snowdream.wallpaper.task.ITaskListener;
 
+/**
+ * @author snowdream <yanghui1986527@gmail.com>
+ * @date 2013-6-10
+ * @version v1.0
+ */
 public class ImageGridFragment extends Fragment {
-	DisplayImageOptions options;
-	GridView mGridView = null;
+    DisplayImageOptions options;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		initUI();
-		initData();
+    GridView mGridView = null;
 
-		return mGridView;
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        initUI();
+        initData();
 
-	private void initData() {
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.ic_stub)
-				.showImageForEmptyUri(R.drawable.ic_empty)
-				.showImageOnFail(R.drawable.ic_error).cacheInMemory()
-				.cacheOnDisc().bitmapConfig(Bitmap.Config.RGB_565).build();
+        return mGridView;
+    }
 
-		Bundle bundle = this.getArguments();
-		if (bundle != null) {
-			Album album = bundle.getParcelable(Extra.ALBUM);
-			loadAlbum(album);
-		}
-	}
+    private void initData() {
+        options = new DisplayImageOptions.Builder().showStubImage(R.drawable.ic_stub)
+                .showImageForEmptyUri(R.drawable.ic_empty).showImageOnFail(R.drawable.ic_error)
+                .cacheInMemory().cacheOnDisc().bitmapConfig(Bitmap.Config.RGB_565).build();
 
-	private GridView initUI() {
-		mGridView = (GridView) getActivity().getLayoutInflater().inflate(
-				R.layout.list_grid, null);
-		mGridView.setBackgroundResource(android.R.color.black);
-		mGridView.setAdapter(new ImageGridAdapter());
-		mGridView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				if (getActivity() == null)
-					return;
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            Album album = bundle.getParcelable(Extra.ALBUM);
+            loadAlbum(album);
+        }
+    }
 
-				Image image = (Image) view.getTag();
-				if (image == null)
-					return;
+    private GridView initUI() {
+        mGridView = (GridView) getActivity().getLayoutInflater().inflate(R.layout.list_grid, null);
+        mGridView.setBackgroundResource(android.R.color.black);
+        mGridView.setAdapter(new ImageGridAdapter());
+        mGridView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (getActivity() == null)
+                    return;
 
-				ListAdapter adapter = mGridView.getAdapter();
-				if ((adapter == null) || !(adapter instanceof ImageGridAdapter)) {
-					return;
-				}
+                Image image = (Image) view.getTag();
+                if (image == null)
+                    return;
 
-				ImageGridActivity activity = (ImageGridActivity) getActivity();
+                ListAdapter adapter = mGridView.getAdapter();
+                if ((adapter == null) || !(adapter instanceof ImageGridAdapter)) {
+                    return;
+                }
 
-				Intent intent = new Intent(activity, ImagePagerActivity.class);
-				intent.putParcelableArrayListExtra(Extra.IMAGES,
-						(ArrayList<? extends Parcelable>) ((ImageGridAdapter)adapter).getList());
-				intent.putExtra(Extra.IMAGE_POSITION, position);
-				startActivity(intent);
-			}
-		});
-		return mGridView;
-	}
+                ImageGridActivity activity = (ImageGridActivity) getActivity();
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-	}
+                Intent intent = new Intent(activity, ImagePagerActivity.class);
+                intent.putParcelableArrayListExtra(Extra.IMAGES,
+                        (ArrayList<? extends Parcelable>) ((ImageGridAdapter) adapter).getList());
+                intent.putExtra(Extra.IMAGE_POSITION, position);
+                startActivity(intent);
+            }
+        });
+        return mGridView;
+    }
 
-	private void loadAlbum(Album album) {
-		if (album == null) {
-			return;
-		}
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
-		ITaskImpl iTaskImpl = new ITaskImpl(getActivity(), album,
-				new ITaskListener() {
+    private void loadAlbum(Album album) {
+        if (album == null) {
+            return;
+        }
 
-					@Override
-					public void onSuccess(List<Image> images) {
-						Log.i("onSuccess" + images.toString());
-						if (getActivity() == null) {
-							Log.w("getActivity() return null!");
-							return;
-						}
-						
-						ImageGridAdapter adapter = new ImageGridAdapter(
-								getActivity(), images, options);
-						mGridView.setAdapter(adapter);
-					}
+        ITaskImpl iTaskImpl = new ITaskImpl(getActivity(), album, new ITaskListener() {
 
-					@Override
-					public void onStart() {
-						Log.i("onStart");
-					}
+            @Override
+            public void onSuccess(List<Image> images) {
+                Log.i("onSuccess" + images.toString());
+                if (getActivity() == null) {
+                    Log.w("getActivity() return null!");
+                    return;
+                }
 
-					@Override
-					public void onFinish() {
-						Log.i("onFinish");
-					}
+                ImageGridAdapter adapter = new ImageGridAdapter(getActivity(), images, options);
+                mGridView.setAdapter(adapter);
+            }
 
-					@Override
-					public void onFailed(Exception e) {
-						Log.e("onFailed :" + e.toString());
-					}
-				});
+            @Override
+            public void onStart() {
+                Log.i("onStart");
+            }
 
-		new Thread(iTaskImpl).start();
+            @Override
+            public void onFinish() {
+                Log.i("onFinish");
+            }
 
-	}
+            @Override
+            public void onFailed(Exception e) {
+                Log.e("onFailed :" + e.toString());
+            }
+        });
+
+        new Thread(iTaskImpl).start();
+
+    }
 }

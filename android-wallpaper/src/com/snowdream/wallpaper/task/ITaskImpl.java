@@ -1,6 +1,18 @@
-/**
- * 
- */
+/*******************************************************************************
+ * Copyright (C) 2013 Snowdream Mobile
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
 
 package com.snowdream.wallpaper.task;
 
@@ -20,7 +32,9 @@ import com.snowdream.wallpaper.sql.ISql;
 import com.snowdream.wallpaper.sql.ISqlImpl;
 
 /**
- * @author snowdream
+ * @author snowdream <yanghui1986527@gmail.com>
+ * @date 2013-6-10
+ * @version v1.0
  */
 public class ITaskImpl implements ITask {
     private int type = ITask.TASK_TYPE_ALBUM;
@@ -115,8 +129,8 @@ public class ITaskImpl implements ITask {
         }
 
         final List<Image> list = iSql.queryImagesFromAlbum(album);
-        
-        if(list != null){
+
+        if (list != null) {
             // onSuccess
             runOnUiThread(new Runnable() {
 
@@ -137,10 +151,10 @@ public class ITaskImpl implements ITask {
         Album talbum = inet.getAlbumFromNet(url);
         if (talbum != null) {
             iSql.addAlbum(talbum);
-            
+
             final List<Image> tlist = iSql.queryImagesFromAlbum(album);
-            
-            if(tlist != null){
+
+            if (tlist != null) {
                 // onSuccess
                 runOnUiThread(new Runnable() {
 
@@ -166,8 +180,8 @@ public class ITaskImpl implements ITask {
         }
 
         final List<Image> list = iSql.queryImagesFromAlbums(albums);
-        
-        if(list != null){
+
+        if (list != null) {
             // onSuccess
             runOnUiThread(new Runnable() {
 
@@ -188,10 +202,10 @@ public class ITaskImpl implements ITask {
         Albums talbums = inet.getAlbumsFromNet(url);
         if (talbums != null) {
             iSql.addAlbums(talbums);
-            
+
             final List<Image> tlist = iSql.queryImagesFromAlbums(albums);
-            
-            if(tlist != null){
+
+            if (tlist != null) {
                 // onSuccess
                 runOnUiThread(new Runnable() {
 
