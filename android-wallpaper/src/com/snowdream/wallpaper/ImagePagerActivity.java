@@ -16,11 +16,14 @@
 
 package com.snowdream.wallpaper;
 
+import java.io.File;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -28,9 +31,12 @@ import android.view.View;
 import android.view.Window;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.widget.ShareActionProvider;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.snowdream.wallpaper.Constants.Extra;
@@ -96,6 +102,28 @@ public class ImagePagerActivity extends SherlockActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate your menu.
+        getSupportMenuInflater().inflate(R.menu.share_action_provider, menu);
+
+        // Set file with share history to the provider and set the share intent.
+        MenuItem actionItem = menu.findItem(R.id.menu_item_share_action_provider_action_bar);
+        ShareActionProvider actionProvider = (ShareActionProvider) actionItem.getActionProvider();
+        actionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
+        // Note that you can set/change the intent any time,
+        // say when the user has selected an image.
+        actionProvider.setShareIntent(createShareIntent());
+        //
+        // menu.add("Share").setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        //
+        // menu.add("Search").setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        //
+        // menu.add("Refresh").setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+        return true;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         getSupportActionBar().show();
@@ -143,6 +171,50 @@ public class ImagePagerActivity extends SherlockActivity {
             public void run() {
                 getSupportActionBar().hide();
             }
-        }, 10000);
+        }, 30000);
+    }
+
+    private Intent createShareIntent() {
+        if (pager == null || pager.getAdapter() == null
+                || !(pager.getAdapter() instanceof ImagePagerAdapter)) {
+            return null;
+        }
+
+        ImagePagerAdapter adapter = (ImagePagerAdapter) pager.getAdapter();
+        List<Image> images = adapter.getImages();
+
+        if (images == null || images.size() <= 0) {
+            return null;
+        }
+
+        int pos = pager.getCurrentItem();
+
+        if (pos >= images.size()) {
+            return null;
+        }
+
+        Image image = images.get(pos);
+
+        if (image == null) {
+            return null;
+        }
+
+        String imageUrl = image.getUrl();
+
+        if (imageUrl == null || imageUrl == "") {
+            return null;
+        }
+
+        File file = ImageLoader.getInstance().getDiscCache().get(imageUrl);
+
+        if (file == null || !file.exists() || !file.canRead()) {
+            return null;
+        }
+
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("image/*");
+        Uri uri = Uri.fromFile(file);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        return shareIntent;
     }
 }

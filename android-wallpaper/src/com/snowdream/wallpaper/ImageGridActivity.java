@@ -40,7 +40,7 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
 
     List<Image> mImages = null;
 
-    private Fragment mContent;
+    private Fragment mContent = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

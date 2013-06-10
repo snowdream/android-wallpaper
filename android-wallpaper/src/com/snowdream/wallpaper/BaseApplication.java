@@ -24,9 +24,10 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
 
+import com.github.snowdream.android.util.Log;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiscCache;
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -63,14 +64,24 @@ public class BaseApplication extends Application {
         // ImageLoaderConfiguration.createDefault(this);
         // method.
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/wallpaper";
-        File cacheDir = StorageUtils.getOwnCacheDirectory(context, path);
+        File cacheDir = StorageUtils.getIndividualCacheDirectory(context);
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
                 .memoryCache(new WeakMemoryCache()).memoryCacheSize(3 * 1024 * 1024)
                 .memoryCacheExtraOptions(480, 800).threadPriority(Thread.NORM_PRIORITY - 1)
                 .denyCacheImageMultipleSizesInMemory()
-                .discCache(new LimitedAgeDiscCache(cacheDir, 2 * 24 * 60 * 60)).threadPoolSize(1)
-                .discCacheFileNameGenerator(new Md5FileNameGenerator())
+                .discCache(new LimitedAgeDiscCache(cacheDir, new FileNameGenerator() {
+
+                    @Override
+                    public String generate(String url) {
+                        if (url == null || url == "") {
+                            Log.w("url is null!");
+                            return "";
+                        }
+                        String fileName = url.substring(url.lastIndexOf('/') + 1, url.length());
+                        return fileName;
+                    }
+                }, 2 * 24 * 60 * 60)).threadPoolSize(1)
                 .tasksProcessingOrder(QueueProcessingType.LIFO).enableLogging().build();
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config);

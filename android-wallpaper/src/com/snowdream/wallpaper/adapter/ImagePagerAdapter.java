@@ -72,6 +72,10 @@ public class ImagePagerAdapter extends PagerAdapter {
         return images.size();
     }
 
+    public List<Image> getImages() {
+        return images;
+    }
+    
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
