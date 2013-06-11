@@ -17,10 +17,12 @@
 package com.snowdream.wallpaper;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -29,8 +31,10 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.ShareActionProvider;
@@ -43,6 +47,8 @@ import com.snowdream.wallpaper.Constants.Extra;
 import com.snowdream.wallpaper.adapter.ImagePagerAdapter;
 import com.snowdream.wallpaper.entity.Image;
 
+import eu.janmuller.android.simplecropimage.CropImage;
+
 /**
  * @author snowdream <yanghui1986527@gmail.com>
  * @date 2013-6-10
@@ -52,11 +58,23 @@ public class ImagePagerActivity extends SherlockActivity {
 
     private static final String STATE_POSITION = "STATE_POSITION";
 
+    public static final int REQUEST_CODE_GALLERY = 0x1;
+
+    public static final int REQUEST_CODE_TAKE_PICTURE = 0x2;
+
+    public static final int REQUEST_CODE_CROP_IMAGE = 0x3;
+
+    public static final int MENU_SAVE = 0;
+
+    public static final int MENU_SET = 1;
+
     DisplayImageOptions options;
 
     ViewPager pager;
 
     private Handler mHandler;
+
+    ActionMode mMode = null;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,12 +131,11 @@ public class ImagePagerActivity extends SherlockActivity {
         // Note that you can set/change the intent any time,
         // say when the user has selected an image.
         actionProvider.setShareIntent(createShareIntent());
-        //
-        // menu.add("Share").setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        //
-        // menu.add("Search").setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        //
-        // menu.add("Refresh").setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menu.add(0, MENU_SAVE, 0, "Save").setShowAsAction(
+                MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+        menu.add(0, MENU_SET, 0, "Set As Wallpaper").setShowAsAction(
+                MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
         return true;
     }
@@ -152,7 +169,12 @@ public class ImagePagerActivity extends SherlockActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                return true;
+                break;
+            case MENU_SAVE:
+                break;
+            case MENU_SET:
+                setWallPaper();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -216,5 +238,84 @@ public class ImagePagerActivity extends SherlockActivity {
         Uri uri = Uri.fromFile(file);
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
         return shareIntent;
+    }
+
+    private void setWallPaper() {
+        if (pager == null || pager.getAdapter() == null
+                || !(pager.getAdapter() instanceof ImagePagerAdapter)) {
+            return;
+        }
+
+        ImagePagerAdapter adapter = (ImagePagerAdapter) pager.getAdapter();
+        List<Image> images = adapter.getImages();
+
+        if (images == null || images.size() <= 0) {
+            return;
+        }
+
+        int pos = pager.getCurrentItem();
+
+        if (pos >= images.size()) {
+            return;
+        }
+
+        Image image = images.get(pos);
+
+        if (image == null) {
+            return;
+        }
+
+        String imageUrl = image.getUrl();
+
+        if (imageUrl == null || imageUrl == "") {
+            return;
+        }
+
+        File file = ImageLoader.getInstance().getDiscCache().get(imageUrl);
+
+        if (file == null || !file.exists() || !file.canRead()) {
+            return;
+        }
+
+        Intent intent = new Intent(this, CropImage.class);
+        intent.putExtra(CropImage.IMAGE_PATH, file.getPath());
+        intent.putExtra(CropImage.SCALE, true);
+
+        intent.putExtra(CropImage.ASPECT_X, 480);
+        intent.putExtra(CropImage.ASPECT_Y, 800);
+
+        startActivityForResult(intent, REQUEST_CODE_CROP_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+
+        Bitmap bitmap = null;
+        switch (requestCode) {
+            case REQUEST_CODE_CROP_IMAGE:
+                String path = data.getStringExtra(CropImage.IMAGE_PATH);
+                if (path == null) {
+                    return;
+                }
+
+                bitmap = BitmapFactory.decodeFile(path);
+
+                if (bitmap != null && !bitmap.isRecycled()) {
+                    try {
+                        setWallpaper(bitmap);
+                        Toast.makeText(this, "Set Successful", Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(this, "Set Failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
