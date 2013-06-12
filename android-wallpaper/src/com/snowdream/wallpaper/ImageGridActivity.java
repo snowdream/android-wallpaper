@@ -65,8 +65,8 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
         }
 
         // set the Above View Fragment
-        if (savedInstanceState != null)
-            mContent = getSupportFragmentManager().getFragment(savedInstanceState, "mContent");
+//        if (savedInstanceState != null)
+//            mContent = getSupportFragmentManager().getFragment(savedInstanceState, "mContent");
         if (mContent == null)
             mContent = new ImageGridFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, mContent)
