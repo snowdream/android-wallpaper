@@ -154,7 +154,7 @@ public class ImagePagerActivity extends SherlockActivity {
         // menu.add(0, MENU_SAVE, 0, "Save").setShowAsAction(
         // MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
-        menu.add(0, MENU_SET, 0, "Set As Wallpaper").setShowAsAction(
+        menu.add(0, MENU_SET, 0, getString(R.string.menu_setaswallpaper)).setShowAsAction(
                 MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
         return true;
