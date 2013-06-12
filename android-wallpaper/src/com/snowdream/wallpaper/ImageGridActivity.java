@@ -99,7 +99,7 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        //super.onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState);
         getSupportFragmentManager().putFragment(outState, "mContent", mContent);
     }
 

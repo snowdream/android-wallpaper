@@ -29,12 +29,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.ShareActionProvider;
@@ -74,7 +74,7 @@ public class ImagePagerActivity extends SherlockActivity {
 
     private Handler mHandler;
 
-    ActionMode mMode = null;
+    ShareActionProvider actionProvider = null;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +116,25 @@ public class ImagePagerActivity extends SherlockActivity {
         setContentView(R.layout.activity_image_pager);
 
         pager = (ViewPager) findViewById(R.id.pager);
-
+        pager.setOnPageChangeListener(new OnPageChangeListener() {
+            
+            @Override
+            public void onPageSelected(int arg0) {
+                if (actionProvider != null) {
+                    actionProvider.setShareIntent(createShareIntent());
+                }
+            }
+            
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+                
+            }
+            
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+                
+            }
+        });
     }
 
     @Override
@@ -126,13 +144,15 @@ public class ImagePagerActivity extends SherlockActivity {
 
         // Set file with share history to the provider and set the share intent.
         MenuItem actionItem = menu.findItem(R.id.menu_item_share_action_provider_action_bar);
-        ShareActionProvider actionProvider = (ShareActionProvider) actionItem.getActionProvider();
+        actionProvider = (ShareActionProvider) actionItem.getActionProvider();
         actionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
         // Note that you can set/change the intent any time,
         // say when the user has selected an image.
-        actionProvider.setShareIntent(createShareIntent());
-//        menu.add(0, MENU_SAVE, 0, "Save").setShowAsAction(
-//                MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        if (actionProvider != null) {
+            actionProvider.setShareIntent(createShareIntent());
+        }
+        // menu.add(0, MENU_SAVE, 0, "Save").setShowAsAction(
+        // MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
         menu.add(0, MENU_SET, 0, "Set As Wallpaper").setShowAsAction(
                 MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
@@ -237,6 +257,8 @@ public class ImagePagerActivity extends SherlockActivity {
         shareIntent.setType("image/*");
         Uri uri = Uri.fromFile(file);
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        //shareIntent.putExtra(Intent.EXTRA_TEXT, "来自");
+
         return shareIntent;
     }
 
