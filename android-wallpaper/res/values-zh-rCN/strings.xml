@@ -3,6 +3,9 @@
 
     <string name="app_name">雪梦壁纸</string>
     <string name="menu_settings">设置</string>
+    <string name="menu_setaswallpaper">设为壁纸</string>
+
     <!-- Content descriptions -->
     <string name="descr_image">图片</string>
+
 </resources>
