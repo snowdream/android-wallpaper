@@ -131,8 +131,8 @@ public class ImagePagerActivity extends SherlockActivity {
         // Note that you can set/change the intent any time,
         // say when the user has selected an image.
         actionProvider.setShareIntent(createShareIntent());
-        menu.add(0, MENU_SAVE, 0, "Save").setShowAsAction(
-                MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+//        menu.add(0, MENU_SAVE, 0, "Save").setShowAsAction(
+//                MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
         menu.add(0, MENU_SET, 0, "Set As Wallpaper").setShowAsAction(
                 MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
