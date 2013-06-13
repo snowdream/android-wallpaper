@@ -21,7 +21,6 @@ import java.io.File;
 import android.app.Application;
 import android.content.Context;
 import android.os.Build;
-import android.os.Environment;
 import android.os.StrictMode;
 
 import com.github.snowdream.android.util.Log;
@@ -63,7 +62,7 @@ public class BaseApplication extends Application {
         // or you can create default configuration by
         // ImageLoaderConfiguration.createDefault(this);
         // method.
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/wallpaper";
+        //String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/wallpaper";
         File cacheDir = StorageUtils.getIndividualCacheDirectory(context);
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)

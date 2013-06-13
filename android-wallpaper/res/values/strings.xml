@@ -4,7 +4,19 @@
     <string name="app_name">snowdream wallpaper</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_setaswallpaper">Set As Wallpaper</string>
+
+    <!-- albums -->
+    <string name="albums_all">All</string>
+    <string name="albums_movie">Movie</string>
+    <string name="albums_car">Car</string>
+    <string name="albums_star">Star</string>
+    <string name="albums_landscape">Landscape</string>
+    <string name="albums_games">Games</string>
+    <string name="albums_anime">Anime</string>
+    <string name="albums_beauty">Beauty</string>
+
     <!-- Content descriptions -->
     <string name="descr_image">Image</string>
     <string name="action_bar_share_with">Share with…</string>
+
 </resources>
