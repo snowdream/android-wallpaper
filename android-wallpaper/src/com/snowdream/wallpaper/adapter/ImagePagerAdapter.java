@@ -18,6 +18,7 @@ package com.snowdream.wallpaper.adapter;
 
 import java.util.List;
 
+import uk.co.senab.photoview.PhotoView;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,7 +28,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 
 import com.github.snowdream.android.util.Log;
@@ -60,6 +61,11 @@ public class ImagePagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
+    	if (object != null && object instanceof PhotoView) {
+        	PhotoView photoView = (PhotoView) object;
+        	ImageLoader.getInstance().cancelDisplayTask(photoView);
+		}
+    	
         ((ViewPager) container).removeView((View) object);
     }
 
@@ -80,8 +86,11 @@ public class ImagePagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup view, int position) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View imageLayout = inflater.inflate(R.layout.item_pager_image, view, false);
-        ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        
+        PhotoView photoView = (PhotoView) imageLayout.findViewById(R.id.image);
+        photoView.setScaleType(ScaleType.FIT_XY);
+
+        photoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mContext == null) {
@@ -102,7 +111,7 @@ public class ImagePagerAdapter extends PagerAdapter {
         final RelativeLayout spinner = (RelativeLayout) imageLayout.findViewById(R.id.rl_loading);
         final String imgUrl = images.get(position).getUrl();
 
-        ImageLoader.getInstance().displayImage(imgUrl, imageView, options,
+        ImageLoader.getInstance().displayImage(imgUrl, photoView, options,
                 new SimpleImageLoadingListener() {
                     @Override
                     public void onLoadingStarted(String imageUri, View view) {

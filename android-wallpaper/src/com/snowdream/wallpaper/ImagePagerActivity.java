@@ -164,7 +164,7 @@ public class ImagePagerActivity extends SherlockActivity {
     public void onResume() {
         super.onResume();
         getSupportActionBar().show();
-        hideActionBarDelayed(mHandler);
+        //hideActionBarDelayed(mHandler);
     }
 
     @Override

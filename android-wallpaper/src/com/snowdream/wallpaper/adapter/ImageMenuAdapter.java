@@ -26,6 +26,8 @@ import android.widget.TextView;
 
 import com.github.snowdream.android.util.Log;
 import com.snowdream.wallpaper.entity.Album;
+import com.snowdream.wallpaper.entity.Albums;
+import com.snowdream.wallpaper.entity.Object;
 
 /**
  * @author snowdream <yanghui1986527@gmail.com>
@@ -33,11 +35,11 @@ import com.snowdream.wallpaper.entity.Album;
  * @version v1.0
  */
 public class ImageMenuAdapter extends BaseAdapter {
-    private List<Album> list = null;
+    private List<Object> list = null;
 
     private LayoutInflater mInflater = null;
 
-    public ImageMenuAdapter(LayoutInflater inflater, List<Album> list) {
+    public ImageMenuAdapter(LayoutInflater inflater, List<Object> list) {
         if (list != null && list.size() > 0) {
             this.list = list;
         }
@@ -45,7 +47,7 @@ public class ImageMenuAdapter extends BaseAdapter {
         this.mInflater = inflater;
     }
 
-    public List<Album> getList() {
+    public List<Object> getList() {
         return list;
     }
 
@@ -61,14 +63,14 @@ public class ImageMenuAdapter extends BaseAdapter {
     }
 
     @Override
-    public Album getItem(int position) {
-        Album album = null;
+    public Object getItem(int position) {
+    	Object object = null;
 
         if (list != null && position < list.size()) {
-            album = list.get(position);
+        	object = list.get(position);
         }
 
-        return album;
+        return object;
     }
 
     @Override
@@ -78,9 +80,9 @@ public class ImageMenuAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Album album = getItem(position);
+    	Object object = getItem(position);
 
-        if (album == null) {
+        if (object == null) {
             Log.w("The Album is null!");
             return null;
         }
@@ -92,9 +94,19 @@ public class ImageMenuAdapter extends BaseAdapter {
         } else {
             textView = (TextView) convertView;
         }
+        
+        if (object instanceof Album) {
+        	Album album = (Album)object;
+            textView.setText(album.getName());
+		}else if (object instanceof Albums) {
+        	Albums albums = (Albums)object;
+            textView.setText(albums.getName());
+		}else{
+            Log.w("Invalid Data!");
+            return null;
+		}
 
-        textView.setText(album.getName());
-        textView.setTag(album);
+        textView.setTag(object);
 
         return textView;
     }

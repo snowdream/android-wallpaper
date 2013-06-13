@@ -36,8 +36,8 @@ import com.github.snowdream.android.util.Log;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.snowdream.wallpaper.Constants.Extra;
 import com.snowdream.wallpaper.adapter.ImageGridAdapter;
-import com.snowdream.wallpaper.entity.Album;
 import com.snowdream.wallpaper.entity.Image;
+import com.snowdream.wallpaper.entity.Object;
 import com.snowdream.wallpaper.task.ITaskImpl;
 import com.snowdream.wallpaper.task.ITaskListener;
 
@@ -66,8 +66,8 @@ public class ImageGridFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            Album album = bundle.getParcelable(Extra.ALBUM);
-            loadAlbum(album);
+        	Object object = bundle.getParcelable(Extra.OBJECT);
+            loadAlbumOrAlbums(object);
         }
     }
 
@@ -107,12 +107,12 @@ public class ImageGridFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-    private void loadAlbum(Album album) {
-        if (album == null) {
+    private void loadAlbumOrAlbums(Object object) {
+        if (object == null) {
             return;
         }
 
-        ITaskImpl iTaskImpl = new ITaskImpl(getActivity(), album, new ITaskListener() {
+        ITaskImpl iTaskImpl = new ITaskImpl(getActivity(), object, new ITaskListener() {
 
             @Override
             public void onSuccess(List<Image> images) {

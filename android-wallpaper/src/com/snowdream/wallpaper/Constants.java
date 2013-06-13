@@ -31,6 +31,10 @@ public final class Constants {
     }
 
     public static class Extra {
+        public static final String OBJECT = "OBJECT";
+
+        public static final String ALBUMS = "ALBUMS";
+
         public static final String ALBUM = "ALBUM";
 
         public static final String IMAGES = "IMAGES";

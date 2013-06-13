@@ -31,6 +31,8 @@ import android.widget.ListView;
 import com.snowdream.wallpaper.Constants.Extra;
 import com.snowdream.wallpaper.adapter.ImageMenuAdapter;
 import com.snowdream.wallpaper.entity.Album;
+import com.snowdream.wallpaper.entity.Albums;
+import com.snowdream.wallpaper.entity.Object;
 
 /**
  * @author snowdream <yanghui1986527@gmail.com>
@@ -51,26 +53,31 @@ public class ImageMenuFragment extends ListFragment {
     }
 
     private void initData(LayoutInflater inflater) {
-        List<Album> list = new ArrayList<Album>();
+        List<Object> list = new ArrayList<Object>();
 
-        Album a1 = new Album();
-        a1.setId("3");
-        a1.setUuid("e80e0099-bb0e-11e2-8ef1-047d7b4d0279");
-        a1.setName("爱情公寓手机壁纸下载");
-        list.add(a1);
+		Albums a0 = new Albums();
+		a0.setId("1");
+		a0.setUuid("c34852ff-d0b7-11e2-8fe6-000c293c165a");
+		a0.setName("test");
+		list.add(a0);
+		
+		Album a1 = new Album();
+		a1.setId("2");
+		a1.setUuid("6fdac02f-d0b4-11e2-83ff-000c293c165a");
+		a1.setName("1");
+		list.add(a1);
 
-        Album a2 = new Album();
-        a2.setId("1");
-        a2.setUuid("b3d184d3-bb0e-11e2-8ef1-047d7b4d0279");
-        a2.setName("经典影视画面手机壁纸壁纸");
-        list.add(a2);
+		Album a2 = new Album();
+		a2.setId("3");
+		a2.setUuid("eb6f46e9-d0b7-11e2-8fe6-000c293c165a");
+		a2.setName("2");
+		list.add(a2);
 
-        Album a3 = new Album();
-        a3.setId("5");
-        a3.setUuid("3c137887-bbe2-11e2-b886-047d7b4d0279");
-        a3.setName("梅西壁纸");
-        list.add(a3);
-
+		Album a3 = new Album();
+		a3.setId("4");
+		a3.setUuid("96fba1be-d0b8-11e2-8fe6-000c293c165a");
+		a3.setName("3");
+		list.add(a3);
         ListAdapter adapter = new ImageMenuAdapter(inflater, list);
         setListAdapter(adapter);
 
@@ -78,7 +85,7 @@ public class ImageMenuFragment extends ListFragment {
         Fragment newContent = new ImageGridFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putParcelable(Extra.ALBUM, a1);
+        bundle.putParcelable(Extra.OBJECT, a1);
         newContent.setArguments(bundle);
 
         if (newContent != null)
@@ -87,16 +94,16 @@ public class ImageMenuFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView lv, View v, int position, long id) {
-        Album album = (Album) v.getTag();
+        Object object = (Object) v.getTag();
 
-        if (album == null) {
+        if (object == null) {
             return;
         }
 
         Fragment newContent = new ImageGridFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putParcelable(Extra.ALBUM, album);
+        bundle.putParcelable(Extra.OBJECT, object);
         newContent.setArguments(bundle);
 
         if (newContent != null)
