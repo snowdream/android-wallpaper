@@ -88,7 +88,7 @@ public class ImagePagerAdapter extends PagerAdapter {
         View imageLayout = inflater.inflate(R.layout.item_pager_image, view, false);
         
         PhotoView photoView = (PhotoView) imageLayout.findViewById(R.id.image);
-        photoView.setScaleType(ScaleType.FIT_XY);
+        photoView.setScaleType(ScaleType.FIT_CENTER);
 
         photoView.setOnClickListener(new View.OnClickListener() {
             @Override
