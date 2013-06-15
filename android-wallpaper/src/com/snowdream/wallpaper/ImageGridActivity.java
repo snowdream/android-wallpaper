@@ -26,6 +26,7 @@ import android.view.View;
 import com.actionbarsherlock.view.MenuItem;
 import com.github.snowdream.android.util.Log;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.snowdream.find.sexygirls.R;
 import com.snowdream.wallpaper.adapter.ImageGridAdapter;
 import com.snowdream.wallpaper.entity.Image;
 

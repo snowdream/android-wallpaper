@@ -37,7 +37,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.snowdream.wallpaper.ImagePagerActivity;
-import com.snowdream.wallpaper.R;
+import com.snowdream.find.sexygirls.R;
 import com.snowdream.wallpaper.entity.Image;
 
 /**

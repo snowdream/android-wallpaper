@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.snowdream.find.sexygirls.R;
 import com.snowdream.wallpaper.Constants.Extra;
 import com.snowdream.wallpaper.adapter.ImageMenuAdapter;
 import com.snowdream.wallpaper.entity.Albums;
@@ -55,55 +56,37 @@ public class ImageMenuFragment extends ListFragment {
         List<Object> list = new ArrayList<Object>();
         
         Albums all = new Albums();
-        all.setId("1");
-        all.setUuid("3720a0db-a6ab-11e2-8058-026bc5020299");
+        all.setId("16");
+        all.setUuid("5b613b95-d509-11e2-8058-026bc5020299");
         all.setName(getString(R.string.albums_all));
         list.add(all);
         
         
-		Albums beauty = new Albums();
-		beauty.setId("8");
-		beauty.setUuid("64495c71-d409-11e2-8058-026bc5020299");
-		beauty.setName(getString(R.string.albums_beauty));
-		list.add(beauty);
+		Albums china = new Albums();
+		china.setId("17");
+		china.setUuid("62d72f9e-d509-11e2-8058-026bc5020299");
+		china.setName(getString(R.string.albums_china));
+		list.add(china);
 		
-		Albums star = new Albums();
-		star.setId("4");
-		star.setUuid("3e3cec31-d409-11e2-8058-026bc5020299");
-		star.setName(getString(R.string.albums_star));
-		list.add(star);
+		Albums japan = new Albums();
+		japan.setId("19");
+		japan.setUuid("6e6ee7fc-d509-11e2-8058-026bc5020299");
+		japan.setName(getString(R.string.albums_japan));
+		list.add(japan);
 
-		Albums anime = new Albums();
-		anime.setId("7");
-		anime.setUuid("51e906f2-d409-11e2-8058-026bc5020299");
-		anime.setName(getString(R.string.albums_anime));
-		list.add(anime);
+		Albums korean = new Albums();
+		korean.setId("23");
+		korean.setUuid("7876dbb4-d50f-11e2-8058-026bc5020299");
+		korean.setName(getString(R.string.albums_korean));
+		list.add(korean);
 
-		Albums landscape = new Albums();
-		landscape.setId("5");
-		landscape.setUuid("45c37f69-d409-11e2-8058-026bc5020299");
-		landscape.setName(getString(R.string.albums_landscape));
-		list.add(landscape);
+		Albums euroan = new Albums();
+		euroan.setId("24");
+		euroan.setUuid("3658bd6b-d511-11e2-8058-026bc5020299");
+		euroan.setName(getString(R.string.albums_euroan));
+		list.add(euroan);
 
-		Albums movie = new Albums();
-        movie.setId("2");
-        movie.setUuid("32bbae9e-d409-11e2-8058-026bc5020299");
-        movie.setName(getString(R.string.albums_movie));
-        list.add(movie);
-        
-        Albums games = new Albums();
-        games.setId("6");
-        games.setUuid("4ac64e61-d409-11e2-8058-026bc5020299");
-        games.setName(getString(R.string.albums_games));
-        list.add(games);
-        
-        Albums car = new Albums();
-        car.setId("3");
-        car.setUuid("39449bfc-d409-11e2-8058-026bc5020299");
-        car.setName(getString(R.string.albums_car));
-        list.add(car);
-        
-        ListAdapter adapter = new ImageMenuAdapter(inflater, list);
+		ListAdapter adapter = new ImageMenuAdapter(inflater, list);
         setListAdapter(adapter);
 
         // init data

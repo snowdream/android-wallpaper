@@ -34,6 +34,7 @@ import android.widget.ListAdapter;
 
 import com.github.snowdream.android.util.Log;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.snowdream.find.sexygirls.R;
 import com.snowdream.wallpaper.Constants.Extra;
 import com.snowdream.wallpaper.adapter.ImageGridAdapter;
 import com.snowdream.wallpaper.entity.Image;

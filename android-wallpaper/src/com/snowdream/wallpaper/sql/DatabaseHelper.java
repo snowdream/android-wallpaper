@@ -26,7 +26,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.snowdream.wallpaper.R;
+import com.snowdream.find.sexygirls.R;
 import com.snowdream.wallpaper.entity.Album;
 import com.snowdream.wallpaper.entity.Albums;
 import com.snowdream.wallpaper.entity.Image;

@@ -28,7 +28,7 @@ import android.widget.ImageView;
 import com.github.snowdream.android.util.Log;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.snowdream.wallpaper.R;
+import com.snowdream.find.sexygirls.R;
 import com.snowdream.wallpaper.entity.Image;
 
 /**

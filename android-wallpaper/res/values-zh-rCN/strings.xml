@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">雪梦壁纸</string>
+    <string name="app_name">性感女孩</string>
     <string name="menu_settings">设置</string>
     <string name="menu_setaswallpaper">设为壁纸</string>
 
     <!-- albums -->
     <string name="albums_all">全部</string>
-    <string name="albums_movie">影视</string>
-    <string name="albums_car">汽车</string>
-    <string name="albums_star">明星</string>
-    <string name="albums_landscape">风景</string>
-    <string name="albums_games">游戏</string>
-    <string name="albums_anime">动漫</string>
-    <string name="albums_beauty">美女</string>
+    <string name="albums_china">中国</string>
+    <string name="albums_japan">日本</string>
+    <string name="albums_korean">韩国</string>
+    <string name="albums_euroan">欧美</string>
 
     <!-- Content descriptions -->
     <string name="descr_image">图片</string>
