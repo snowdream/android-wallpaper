@@ -28,6 +28,7 @@ import com.github.snowdream.android.util.Log;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.snowdream.wallpaper.adapter.ImageGridAdapter;
 import com.snowdream.wallpaper.entity.Image;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @author snowdream <yanghui1986527@gmail.com>
@@ -86,6 +87,7 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
 
         Log.setTag("Wallpaper");
         Log.setEnabled(true);
+        MobclickAgent.onError(this);
     }
 
     @Override

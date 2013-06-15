@@ -46,6 +46,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.snowdream.wallpaper.Constants.Extra;
 import com.snowdream.wallpaper.adapter.ImagePagerAdapter;
 import com.snowdream.wallpaper.entity.Image;
+import com.umeng.analytics.MobclickAgent;
 
 import eu.janmuller.android.simplecropimage.CropImage;
 
@@ -101,6 +102,7 @@ public class ImagePagerActivity extends SherlockActivity {
 
         pager.setAdapter(new ImagePagerAdapter(this, images, options));
         pager.setCurrentItem(pagerPosition);
+        MobclickAgent.onError(this);
     }
 
     private void initUI() {
@@ -117,22 +119,22 @@ public class ImagePagerActivity extends SherlockActivity {
 
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setOnPageChangeListener(new OnPageChangeListener() {
-            
+
             @Override
             public void onPageSelected(int arg0) {
                 if (actionProvider != null) {
                     actionProvider.setShareIntent(createShareIntent());
                 }
             }
-            
+
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
-                
+
             }
-            
+
             @Override
             public void onPageScrollStateChanged(int arg0) {
-                
+
             }
         });
     }
@@ -164,7 +166,14 @@ public class ImagePagerActivity extends SherlockActivity {
     public void onResume() {
         super.onResume();
         getSupportActionBar().show();
-        //hideActionBarDelayed(mHandler);
+        // hideActionBarDelayed(mHandler);
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override
@@ -257,7 +266,7 @@ public class ImagePagerActivity extends SherlockActivity {
         shareIntent.setType("image/*");
         Uri uri = Uri.fromFile(file);
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        //shareIntent.putExtra(Intent.EXTRA_TEXT, "来自");
+        // shareIntent.putExtra(Intent.EXTRA_TEXT, "来自");
 
         return shareIntent;
     }

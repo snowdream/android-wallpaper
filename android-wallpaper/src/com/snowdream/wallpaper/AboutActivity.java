@@ -16,9 +16,10 @@
 
 package com.snowdream.wallpaper;
 
-import com.google.analytics.tracking.android.EasyTracker;
-
 import android.app.Activity;
+
+import com.google.analytics.tracking.android.EasyTracker;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @author snowdream <yanghui1986527@gmail.com>
@@ -38,4 +39,17 @@ public class AboutActivity extends Activity {
         super.onStop();
         EasyTracker.getInstance().activityStop(this);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    
 }

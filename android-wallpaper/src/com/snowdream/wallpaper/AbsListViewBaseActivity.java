@@ -23,6 +23,7 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.PauseOnScrollListener;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @author snowdream <yanghui1986527@gmail.com>
@@ -50,9 +51,16 @@ public class AbsListViewBaseActivity extends SlidingFragmentActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         applyScrollListener();
+        MobclickAgent.onResume(this);
     }
 
     private void applyScrollListener() {
@@ -95,4 +103,6 @@ public class AbsListViewBaseActivity extends SlidingFragmentActivity {
         super.onStop();
         EasyTracker.getInstance().activityStop(this);
     }
+    
+    
 }
