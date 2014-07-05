@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-include ':app',":crop:simple-crop-image-lib"
+include ':app',':simple-crop-image-lib'

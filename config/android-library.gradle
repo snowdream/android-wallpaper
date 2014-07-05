@@ -44,6 +44,25 @@ android {
     lintOptions {
         abortOnError false
     }
+    sourceSets {
+        main {
+            manifest {
+                srcFile 'AndroidManifest.xml'
+            }
+            java {
+                srcDir 'src'
+            }
+            res {
+                srcDir 'res'
+            }
+            assets {
+                srcDir 'assets'
+            }
+            resources {
+                srcDir 'src'
+            }
+        }
+    }
 }
 
     android.libraryVariants.all { variant ->

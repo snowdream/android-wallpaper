@@ -17,6 +17,7 @@
 package com.snowdream.wallpaper.net;
 
 
+import com.github.kevinsawicki.http.HttpRequest;
 
 /**
  * @author snowdream <yanghui1986527@gmail.com>
@@ -26,7 +27,7 @@ package com.snowdream.wallpaper.net;
 public class SyncHttpClient {
 
     public static String get(String url) {
-        String response = HttpRequest.get("http://google.com").body();
+        String response = HttpRequest.get(url).body();
         return response;
     }
 }

@@ -16,25 +16,4 @@
 
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply from: '../../config/android-library.gradle'
-android {
-    sourceSets {
-        main {
-            manifest {
-                srcFile 'AndroidManifest.xml'
-            }
-            java {
-                srcDir 'src'
-            }
-            res {
-                srcDir 'res'
-            }
-            assets {
-                srcDir 'assets'
-            }
-            resources {
-                srcDir 'src'
-            }
-        }
-    }
-}
+apply from: '../config/android-library.gradle'

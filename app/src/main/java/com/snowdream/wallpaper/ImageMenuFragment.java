@@ -56,50 +56,50 @@ public class ImageMenuFragment extends ListFragment {
         
         Albums all = new Albums();
         all.setId("1");
-        all.setUuid("3720a0db-a6ab-11e2-8058-026bc5020299");
+        all.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
         all.setName(getString(R.string.albums_all));
         list.add(all);
         
         
 		Albums beauty = new Albums();
 		beauty.setId("8");
-		beauty.setUuid("64495c71-d409-11e2-8058-026bc5020299");
+		beauty.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
 		beauty.setName(getString(R.string.albums_beauty));
 		list.add(beauty);
 		
 		Albums star = new Albums();
 		star.setId("4");
-		star.setUuid("3e3cec31-d409-11e2-8058-026bc5020299");
+		star.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
 		star.setName(getString(R.string.albums_star));
 		list.add(star);
 
 		Albums anime = new Albums();
 		anime.setId("7");
-		anime.setUuid("51e906f2-d409-11e2-8058-026bc5020299");
+		anime.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
 		anime.setName(getString(R.string.albums_anime));
 		list.add(anime);
 
 		Albums landscape = new Albums();
 		landscape.setId("5");
-		landscape.setUuid("45c37f69-d409-11e2-8058-026bc5020299");
+		landscape.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
 		landscape.setName(getString(R.string.albums_landscape));
 		list.add(landscape);
 
 		Albums movie = new Albums();
         movie.setId("2");
-        movie.setUuid("32bbae9e-d409-11e2-8058-026bc5020299");
+        movie.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
         movie.setName(getString(R.string.albums_movie));
         list.add(movie);
         
         Albums games = new Albums();
         games.setId("6");
-        games.setUuid("4ac64e61-d409-11e2-8058-026bc5020299");
+        games.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
         games.setName(getString(R.string.albums_games));
         list.add(games);
         
         Albums car = new Albums();
         car.setId("3");
-        car.setUuid("39449bfc-d409-11e2-8058-026bc5020299");
+        car.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
         car.setName(getString(R.string.albums_car));
         list.add(car);
         

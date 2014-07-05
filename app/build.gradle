@@ -19,14 +19,13 @@ apply plugin: 'idea'
 apply from: '../config/android.gradle'
 
 dependencies {
-    compile project(":crop:simple-crop-image-lib")
+    compile project(':simple-crop-image-lib')
     compile 'com.jeremyfeinstein.slidingmenu:library:1.3@aar'
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile 'com.android.support:support-v4:18.0.+'
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.github.chrisbanes.photoview:library:1.2.3'
-    compile 'com.loopj.android:android-async-http:1.4.5'
     compile 'com.github.kevinsawicki:http-request:5.6'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.2'
     compile 'com.github.snowdream.android.util:log:1.0.4'

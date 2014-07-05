@@ -55,7 +55,7 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
             getSlidingMenu().setSlidingEnabled(true);
             getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
             // show home as up so we can toggle
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getActionBar().setDisplayHomeAsUpEnabled(true);
         } else {
             // add a dummy view
             View v = new View(this);
@@ -89,7 +89,7 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 toggle();
