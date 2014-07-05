@@ -28,6 +28,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 import com.github.snowdream.android.util.Log;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -45,6 +47,7 @@ import java.util.List;
  * @date 2013-6-10
  */
 public class ImagePagerAdapter extends PagerAdapter {
+    private static final String TEST_DEVICE_ID = "INSERT_YOUR_TEST_DEVICE_ID_HERE";
 
     private List<Image> images;
 
@@ -85,6 +88,14 @@ public class ImagePagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup view, int position) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View imageLayout = inflater.inflate(R.layout.item_pager_image, view, false);
+
+        // The "loadAdOnCreate" and "testDevices" XML attributes no longer available.
+        AdView adView = (AdView) imageLayout.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice(TEST_DEVICE_ID)
+                .build();
+        adView.loadAd(adRequest);
 
         PhotoView photoView = (PhotoView) imageLayout.findViewById(R.id.image);
         photoView.setScaleType(ScaleType.FIT_CENTER);

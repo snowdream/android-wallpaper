@@ -25,9 +25,9 @@ import com.snowdream.wallpaper.entity.Albums;
  * @version v1.0
  */
 public interface INet {
-    public static final String URL_ALBUM = "http://172.16.3.151/gallerycms/index.php/api/feed/json/";
+    public static final String URL_ALBUM = "http://192.168.42.151/gallerycms/index.php/api/feed/json/";
 
-    public static final String URL_ALBUMS = "http://172.16.3.151/gallerycms/index.php/api/myfeed/json/";
+    public static final String URL_ALBUMS = "http://192.168.42.151/gallerycms/index.php/api/myfeed/json/";
 
     public Albums getAlbumsFromNet(String url) throws Exception;
 

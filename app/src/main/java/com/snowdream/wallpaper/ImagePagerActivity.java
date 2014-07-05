@@ -16,10 +16,6 @@
 
 package com.snowdream.wallpaper;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,7 +29,6 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
-
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -46,15 +41,19 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.snowdream.wallpaper.Constants.Extra;
 import com.snowdream.wallpaper.adapter.ImagePagerAdapter;
 import com.snowdream.wallpaper.entity.Image;
-
 import eu.janmuller.android.simplecropimage.CropImage;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author snowdream <yanghui1986527@gmail.com>
- * @date 2013-6-10
  * @version v1.0
+ * @date 2013-6-10
  */
 public class ImagePagerActivity extends SherlockActivity {
+
 
     private static final String STATE_POSITION = "STATE_POSITION";
 
@@ -117,24 +116,25 @@ public class ImagePagerActivity extends SherlockActivity {
 
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setOnPageChangeListener(new OnPageChangeListener() {
-            
+
             @Override
             public void onPageSelected(int arg0) {
                 if (actionProvider != null) {
                     actionProvider.setShareIntent(createShareIntent());
                 }
             }
-            
+
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
-                
+
             }
-            
+
             @Override
             public void onPageScrollStateChanged(int arg0) {
-                
+
             }
         });
+
     }
 
     @Override

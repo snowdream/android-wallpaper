@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+             xmlns:ads="http://schemas.android.com/apk/res-auto"
+             android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:padding="1dip" >
 
@@ -24,12 +25,13 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true" />
 
-        <include
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/loading"
-            android:layout_centerHorizontal="true"
-            layout="@layout/widget_admob" />
+        <com.google.android.gms.ads.AdView android:id="@+id/adView"
+                                           android:layout_width="fill_parent"
+                                           android:layout_height="wrap_content"
+                                           android:layout_below="@id/loading"
+                                           android:layout_centerHorizontal="true"
+                                           ads:adSize="BANNER"
+                                           ads:adUnitId="ca-app-pub-4784160492252285/8007359254"/>
     </RelativeLayout>
 
 </FrameLayout>
