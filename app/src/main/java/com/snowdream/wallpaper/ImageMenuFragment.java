@@ -55,51 +55,51 @@ public class ImageMenuFragment extends ListFragment {
         List<Object> list = new ArrayList<Object>();
         
         Albums all = new Albums();
-        all.setId("1");
-        all.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
+        all.setId("2");
+        all.setUuid("580e9a2d-09d0-11e4-b856-12bcb1c7c494");
         all.setName(getString(R.string.albums_all));
         list.add(all);
         
         
 		Albums beauty = new Albums();
-		beauty.setId("8");
-		beauty.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
+		beauty.setId("1");
+		beauty.setUuid("f7342ec1-09c7-11e4-b856-12bcb1c7c494");
 		beauty.setName(getString(R.string.albums_beauty));
 		list.add(beauty);
 		
 		Albums star = new Albums();
-		star.setId("4");
-		star.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
+		star.setId("3");
+		star.setUuid("8487e58a-09d0-11e4-b856-12bcb1c7c494");
 		star.setName(getString(R.string.albums_star));
 		list.add(star);
 
 		Albums anime = new Albums();
-		anime.setId("7");
-		anime.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
+		anime.setId("4");
+		anime.setUuid("987820e7-09d0-11e4-b856-12bcb1c7c494");
 		anime.setName(getString(R.string.albums_anime));
 		list.add(anime);
 
 		Albums landscape = new Albums();
 		landscape.setId("5");
-		landscape.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
+		landscape.setUuid("a9b93bdd-09d0-11e4-b856-12bcb1c7c494");
 		landscape.setName(getString(R.string.albums_landscape));
 		list.add(landscape);
 
 		Albums movie = new Albums();
-        movie.setId("2");
-        movie.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
+        movie.setId("6");
+        movie.setUuid("c7192173-09d0-11e4-b856-12bcb1c7c494");
         movie.setName(getString(R.string.albums_movie));
         list.add(movie);
         
         Albums games = new Albums();
-        games.setId("6");
-        games.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
+        games.setId("7");
+        games.setUuid("d678e88a-09d0-11e4-b856-12bcb1c7c494");
         games.setName(getString(R.string.albums_games));
         list.add(games);
         
         Albums car = new Albums();
-        car.setId("3");
-        car.setUuid("1c0d62bf-03f5-11e4-999e-f4b7e20687da");
+        car.setId("8");
+        car.setUuid("f948412a-09d0-11e4-b856-12bcb1c7c494");
         car.setName(getString(R.string.albums_car));
         list.add(car);
         
